@@ -9,7 +9,7 @@ modified: 2026-08-11
 
 ## 系列
 
-- [[rl/reward-resemble/|Reward Resemble 系列]] — 奖励信号的设计、标准化、聚合与风险敏感优化。
+- [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]] — 奖励设计、Reward Model、多目标聚合与约束优化；支持推荐、认领和协作维护。
 
 ## 论文
 

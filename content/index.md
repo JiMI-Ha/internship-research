@@ -127,7 +127,7 @@ RLHF 中“更有用”和“更安全”发生冲突时，Safe RLHF 分别学�
 ## 内容地图
 
 - **[[papers/|论文调研]]**：按 Motivation、Method、Results、Limitations 结构整理。
-- **[[rl/|RL]] → [[rl/reward-resemble/|Reward Resemble 系列]]**：奖励设计、聚合与优化方法。
+- **[[rl/|RL]] → [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]]**：奖励设计、Reward Model、多目标聚合与约束优化。
 - **[[llm-safety/|LLM Safety]] → [[llm-safety/over-refusal/|Over-Refusal 系列]]**：安全拒答、过度拒答与边界评测。
 - **方法笔记**：沉淀可跨论文复用的算法与实验设计知识。
 - **实习观察**：记录工程实践、复现过程和阶段性判断。

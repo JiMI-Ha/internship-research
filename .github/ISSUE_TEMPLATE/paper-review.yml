@@ -1,0 +1,74 @@
+name: 推荐 / 认领 Reward Resemble 论文
+description: 推荐值得收录的论文，或认领一篇完整阅读笔记
+title: "[Paper] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢参与维护。只推荐论文也完全可以；准备撰写时请先搜索现有页面与 Issues，避免重复。
+
+  - type: input
+    id: paper_url
+    attributes:
+      label: 论文链接
+      description: 请提供公开论文页、arXiv 或会议页面，不要上传本地私有文件。
+      placeholder: https://arxiv.org/abs/xxxx.xxxxx
+    validations:
+      required: true
+
+  - type: input
+    id: paper_title
+    attributes:
+      label: 论文标题
+    validations:
+      required: true
+
+  - type: dropdown
+    id: contribution_type
+    attributes:
+      label: 参与方式
+      options:
+        - 仅推荐，等待其他成员认领
+        - 我准备认领并撰写完整笔记
+        - 我已经有草稿，希望协作完善
+    validations:
+      required: true
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: 主要方向
+      options:
+        - Reward design / decomposition
+        - Reward Model / judge
+        - Multi-objective alignment
+        - Constrained / risk-sensitive alignment
+        - Reward hacking / robustness
+        - 暂不确定，需要讨论
+    validations:
+      required: true
+
+  - type: textarea
+    id: relevance
+    attributes:
+      label: 为什么值得收录？
+      description: 简要说明它解决的奖励问题、核心方法，以及与现有论文的关系。
+      placeholder: 这篇论文主要解决……，与 RVPO / Safe RLHF 的区别是……
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 建议重点核对的证据
+      description: 可填写关键表格、实验、消融或你最不确定的主张。
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已搜索现有论文页面与 Issues，未发现同一论文的重复条目。
+          required: true
+        - label: 我理解正式笔记需要阅读正文与附录，不能只依赖摘要。
+          required: true

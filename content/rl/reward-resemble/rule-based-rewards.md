@@ -4,6 +4,8 @@ created: 2026-08-11
 published: 2026-08-11
 modified: 2026-08-11
 type: paper
+business_fit: 0
+paper_solidity: 0
 authors: "Tong Mu, Alec Helyar, Johannes Heidecke, Joshua Achiam, Andrea Vallone, Ian Kivlichan, Molly Lin, Alex Beutel, John Schulman, Lilian Weng"
 aliases:
   - papers/rule-based-rewards

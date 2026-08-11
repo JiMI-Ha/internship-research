@@ -4,6 +4,8 @@ created: 2026-08-11
 published: 2026-08-11
 modified: 2026-08-11
 type: paper
+business_fit: 0
+paper_solidity: 0
 authors: "Zixuan Liu, Xiaolin Sun, Zizhan Zheng"
 aliases:
   - papers/constrained-dpo

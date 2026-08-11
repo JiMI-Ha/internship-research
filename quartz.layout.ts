@@ -17,6 +17,12 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.TagList(),
+    Component.ConditionalRender({
+      component: Component.PaperRating({ variant: "badge" }),
+      condition: (page) =>
+        page.fileData.frontmatter?.type === "paper" &&
+        (page.fileData.frontmatter?.tags ?? []).includes("reward-resemble"),
+    }),
     Component.ReaderMode(),
   ],
   left: [
@@ -42,6 +48,10 @@ export const defaultListPageLayout: PageLayout = {
     Component.Breadcrumbs(),
     Component.ArticleTitle(),
     Component.ContentMeta(),
+    Component.ConditionalRender({
+      component: Component.PaperRating({ variant: "board" }),
+      condition: (page) => page.fileData.slug === "rl/reward-resemble/index",
+    }),
     Component.ReaderMode(),
   ],
   left: [

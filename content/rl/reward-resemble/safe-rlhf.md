@@ -4,6 +4,8 @@ created: 2026-08-11
 published: 2026-08-11
 modified: 2026-08-11
 type: paper
+business_fit: 0
+paper_solidity: 0
 authors: "Josef Dai, Xuehai Pan, Ruiyang Sun, Jiaming Ji, Xinbo Xu, Mickel Liu, Yizhou Wang, Yaodong Yang"
 aliases:
   - papers/safe-rlhf

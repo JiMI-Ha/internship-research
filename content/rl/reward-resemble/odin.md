@@ -4,6 +4,8 @@ created: 2026-08-11
 published: 2026-08-11
 modified: 2026-08-11
 type: paper
+business_fit: 0
+paper_solidity: 0
 authors: "Lichang Chen, Chen Zhu, Davit Soselia, Jiuhai Chen, Tianyi Zhou, Tom Goldstein, Heng Huang, Mohammad Shoeybi, Bryan Catanzaro"
 aliases:
   - papers/odin

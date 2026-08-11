@@ -9,4 +9,5 @@ modified: 2026-08-11
 
 ## 论文列表
 
+- **RL / Reward Resemble**：[[rl/reward-resemble/safe-rlhf|Safe RLHF：用动态安全约束平衡有用与无害]] — 安全 RLHF、奖励与成本解耦、拉格朗日约束
 - **RL / Reward Resemble**：[[rl/reward-resemble/rvpo|RVPO：通过方差正则实现风险敏感对齐]] — 多目标 RLHF、奖励聚合、约束忽略

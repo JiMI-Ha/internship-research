@@ -16,6 +16,18 @@ modified: 2026-08-11
 
 ## 最新调研
 
+### [[rl/reward-resemble/safe-rlhf|Safe RLHF：用动态安全约束平衡有用与无害]]
+
+`RL` · `Reward Resemble 系列`
+
+RLHF 中“更有用”和“更安全”发生冲突时，Safe RLHF 分别学习 Reward Model 与 Cost Model，把安全写成约束，并用拉格朗日乘子随训练状态动态调整两者权重。
+
+- **Motivation**：单一总体偏好让标注者隐式解决价值冲突，固定奖励权重又容易过度优化其中一侧。
+- **Method**：解耦帮助性与无害性标注，在 PPO 中最大化 reward，同时约束期望 cost 不超过阈值。
+- **Results**：三轮训练后，人工标注有害响应率由 53.08% 降至 2.45%，帮助性与无害性 Elo 同时上升。
+
+[[rl/reward-resemble/safe-rlhf|阅读全文 →]]
+
 ### [[rl/reward-resemble/rvpo|RVPO：通过方差正则实现风险敏感对齐]]
 
 `RL` · `Reward Resemble 系列`

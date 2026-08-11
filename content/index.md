@@ -16,6 +16,18 @@ modified: 2026-08-11
 
 ## 最新调研
 
+### [[rl/reward-resemble/lemur|LEMUR：从多位教师偏好联合学习多目标 Reward 与 Policy]]
+
+`RL` · `Reward Resemble 系列` · `本轮新增 39 篇`
+
+LEMUR 为不同偏好来源分别学习 objective-specific reward model，再用 MORL 训练一组 trade-off policy；它提醒我们不要把冲突教师的反馈直接池化成单一 RM。
+
+- **Motivation**：不同教师关注冲突目标时，池化偏好会制造互相矛盾的监督。
+- **Method**：分教师学习 RM，用最新 reward 动态重标 replay buffer，再优化多目标策略。
+- **Results**：四个控制环境的 Pareto 曲线更接近 oracle；但教师是 scripted，尚非真实人类或 LLM 场景。
+
+[[rl/reward-resemble/lemur|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 46 篇研究地图 →]]
+
 ### [[rl/reward-resemble/prism|PRISM：不要混合奖励，而要组合策略]]
 
 `RL` · `Reward Resemble 系列`

@@ -411,6 +411,7 @@ export default ((options: PaperRatingOptions) => {
   cursor: pointer;
   font-size: 0.75rem;
   text-decoration: underline;
+  white-space: nowrap;
 }
 
 .paper-rating-value {

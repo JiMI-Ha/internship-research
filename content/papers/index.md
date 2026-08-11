@@ -9,4 +9,4 @@ modified: 2026-08-11
 
 ## 论文列表
 
-- [[papers/rvpo|RVPO：通过方差正则实现风险敏感对齐]] — 多目标 RLHF、奖励聚合、约束忽略
+- **RL / Reward Resemble**：[[rl/reward-resemble/rvpo|RVPO：通过方差正则实现风险敏感对齐]] — 多目标 RLHF、奖励聚合、约束忽略

@@ -35,19 +35,20 @@
 
 每次触发后：
 
-1. 在 `content/papers/` 创建独立 Markdown 页面，文件名使用稳定、简洁的英文 slug。
+1. 按主题分类创建独立 Markdown 页面，文件名使用稳定、简洁的英文 slug。RL 奖励设计与聚合类论文归入 `content/rl/reward-resemble/`；其他主题优先复用已有分类，不存在时再创建清晰的分类目录。
 2. 使用完整 frontmatter，至少包含 `title`、`created`、`published`、`modified`、`type`、`tags` 和 `source_url`。
 3. 将新论文加入 `content/papers/index.md`。
-4. 更新 `content/index.md` 的“最新调研”，使最新论文位于首位；保留已有论文入口，不要覆盖历史内容。
-5. 运行：
+4. 将新论文加入对应分类及系列的 `index.md`。RL 奖励设计与聚合类论文同时加入 `content/rl/index.md` 和 `content/rl/reward-resemble/index.md`。
+5. 更新 `content/index.md` 的“最新调研”，使最新论文位于首位；保留已有论文入口，不要覆盖历史内容。
+6. 运行：
    - `npm ci`（仅在依赖缺失时）
    - `npm run build`
    - `npx tsc --noEmit`
    - 对本次修改文件运行 Prettier 检查
-6. 在浏览器中检查首页与新论文页，确认标题、正文、公式、表格、链接和控制台均正常。
-7. 创建清晰的 Git commit，并推送到 `origin/main`。
-8. 等待 GitHub Pages 工作流成功，再验证线上首页与论文页面返回 HTTP 200。
-9. 最终回复同时给出线上论文链接和 GitHub commit 信息。
+7. 在浏览器中检查首页与新论文页，确认标题、正文、公式、表格、链接和控制台均正常。
+8. 创建清晰的 Git commit，并推送到 `origin/main`。
+9. 等待 GitHub Pages 工作流成功，再验证线上首页与论文页面返回 HTTP 200。
+10. 最终回复同时给出线上论文链接和 GitHub commit 信息。
 
 ## 发布安全与失败处理
 

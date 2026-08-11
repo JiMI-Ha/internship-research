@@ -5,8 +5,12 @@ published: 2026-08-11
 modified: 2026-08-11
 type: paper
 authors: "Ivan Montero, Tomasz Jurczyk, Bhuwan Dhingra"
+aliases:
+  - papers/rvpo
 tags:
   - paper
+  - RL
+  - reward-resemble
   - RLHF
   - multi-objective
   - alignment

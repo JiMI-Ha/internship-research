@@ -7,10 +7,10 @@ type PaperRatingOptions = {
   variant: "board" | "badge"
 }
 
-type Rating = {
+export type Rating = {
   businessFit: number
   paperSolidity: number
-  rated: boolean
+  status: "complete" | "business-only" | "unrated"
   total: number
 }
 
@@ -20,39 +20,102 @@ function normalizeScore(value: unknown): number {
   return Math.max(0, Math.min(5, Math.round(score)))
 }
 
-function getRating(page: QuartzPluginData): Rating {
-  const businessFit = normalizeScore(page.frontmatter?.business_fit)
-  const paperSolidity = normalizeScore(page.frontmatter?.paper_solidity)
-  const rated = businessFit > 0 && paperSolidity > 0
+export function createRating(businessValue: unknown, solidityValue: unknown): Rating {
+  const businessFit = normalizeScore(businessValue)
+  const paperSolidity = normalizeScore(solidityValue)
+  const status =
+    businessFit > 0 && paperSolidity > 0
+      ? "complete"
+      : businessFit > 0
+        ? "business-only"
+        : "unrated"
 
   return {
     businessFit,
     paperSolidity,
-    rated,
-    total: rated ? businessFit + paperSolidity : 0,
+    status,
+    total: status === "complete" ? businessFit + paperSolidity : 0,
   }
 }
 
-function Stars({ score, label }: { score: number; label: string }) {
+function getRating(page: QuartzPluginData): Rating {
+  return createRating(page.frontmatter?.business_fit, page.frontmatter?.paper_solidity)
+}
+
+export function compareRatings(left: Rating, right: Rating): number {
+  const statusOrder = { complete: 0, "business-only": 1, unrated: 2 }
+  const statusDifference = statusOrder[left.status] - statusOrder[right.status]
+  if (statusDifference !== 0) return statusDifference
+
+  if (left.status === "complete" && right.status === "complete") {
+    if (left.total !== right.total) return right.total - left.total
+    if (left.businessFit !== right.businessFit) return right.businessFit - left.businessFit
+    if (left.paperSolidity !== right.paperSolidity) return right.paperSolidity - left.paperSolidity
+  }
+
+  if (left.status === "business-only" && right.status === "business-only") {
+    if (left.businessFit !== right.businessFit) return right.businessFit - left.businessFit
+  }
+
+  return 0
+}
+
+function Stars({
+  score,
+  label,
+  metric,
+}: {
+  score: number
+  label: string
+  metric: "businessFit" | "paperSolidity"
+}) {
   const text = score > 0 ? `${score}/5` : "待评"
 
   return (
-    <span class="paper-rating-stars" role="img" aria-label={`${label}：${text}`}>
+    <span class="paper-rating-stars" aria-label={`${label}：${text}`}>
       {Array.from({ length: 5 }, (_, index) => (
-        <span class={index < score ? "star-filled" : "star-empty"}>
+        <button
+          type="button"
+          class={`paper-rating-star ${index < score ? "star-filled" : "star-empty"}`}
+          data-rating-star={metric}
+          data-rating-score={index + 1}
+          aria-label={`${label} ${index + 1} 星`}
+          aria-pressed={index < score}
+        >
           {index < score ? "★" : "☆"}
-        </span>
+        </button>
       ))}
     </span>
   )
 }
 
-function RatingMetric({ label, score }: { label: string; score: number }) {
+function RatingMetric({
+  label,
+  score,
+  metric,
+  emptyLabel = "待评价",
+}: {
+  label: string
+  score: number
+  metric: "businessFit" | "paperSolidity"
+  emptyLabel?: string
+}) {
   return (
-    <div class="paper-rating-metric">
+    <div class="paper-rating-metric" data-rating-metric={metric}>
       <span class="paper-rating-label">{label}</span>
-      <Stars score={score} label={label} />
-      <span class="paper-rating-value">{score > 0 ? `${score}/5` : "待评价"}</span>
+      <Stars score={score} label={label} metric={metric} />
+      <span class="paper-rating-value" data-rating-value>
+        {score > 0 ? `${score}/5` : emptyLabel}
+      </span>
+      <button
+        type="button"
+        class="paper-rating-clear"
+        data-rating-clear={metric}
+        aria-label={`清除${label}评分`}
+        hidden={score === 0}
+      >
+        清除
+      </button>
     </div>
   )
 }
@@ -65,14 +128,33 @@ export default ((options: PaperRatingOptions) => {
   }: QuartzComponentProps) => {
     if (options.variant === "badge") {
       const rating = getRating(fileData)
+      const statusText =
+        rating.status === "complete"
+          ? `综合 ${rating.total}/10`
+          : rating.status === "business-only"
+            ? "仅评业务 · solid 未评"
+            : "待评价"
       return (
-        <aside class={classNames(displayClass, "paper-rating-badge")} aria-label="主编评分">
+        <aside
+          class={classNames(displayClass, "paper-rating-badge")}
+          aria-label="主编评分"
+          data-paper-rating
+          data-rating-slug={fileData.slug}
+          data-rating-title={fileData.frontmatter?.title}
+          data-default-business-fit={rating.businessFit}
+          data-default-paper-solidity={rating.paperSolidity}
+        >
           <div class="paper-rating-badge-title">
             <strong>主编评分</strong>
-            <span>{rating.rated ? `综合 ${rating.total}/10` : "待评价"}</span>
+            <span data-rating-status>{statusText}</span>
           </div>
-          <RatingMetric label="业务契合度" score={rating.businessFit} />
-          <RatingMetric label="Paper solid 度" score={rating.paperSolidity} />
+          <RatingMetric label="业务契合度" score={rating.businessFit} metric="businessFit" />
+          <RatingMetric
+            label="Paper solid 度"
+            score={rating.paperSolidity}
+            metric="paperSolidity"
+            emptyLabel={rating.status === "business-only" ? "未评（未读）" : "待评价"}
+          />
         </aside>
       )
     }
@@ -84,12 +166,9 @@ export default ((options: PaperRatingOptions) => {
       )
       .map((page) => ({ page, rating: getRating(page) }))
       .sort((left, right) => {
-        if (left.rating.rated !== right.rating.rated) return left.rating.rated ? -1 : 1
-        if (left.rating.total !== right.rating.total) return right.rating.total - left.rating.total
-        if (left.rating.businessFit !== right.rating.businessFit)
-          return right.rating.businessFit - left.rating.businessFit
-        if (left.rating.paperSolidity !== right.rating.paperSolidity)
-          return right.rating.paperSolidity - left.rating.paperSolidity
+        const ratingDifference = compareRatings(left.rating, right.rating)
+        if (ratingDifference !== 0) return ratingDifference
+
         return String(left.page.frontmatter?.title).localeCompare(
           String(right.page.frontmatter?.title),
           "zh-CN",
@@ -102,28 +181,56 @@ export default ((options: PaperRatingOptions) => {
       <section
         class={classNames(displayClass, "paper-rating-board")}
         aria-labelledby="rating-board-title"
+        data-paper-rating-board
       >
         <div class="paper-rating-board-heading">
           <div>
             <p class="paper-rating-kicker">EDITOR'S RATING</p>
             <h2 id="rating-board-title">论文评分榜</h2>
           </div>
-          <p>业务契合度 + Paper solid 度，满分 10 分</p>
+          <p>先看业务契合度；读过后再评 Paper solid 度</p>
         </div>
 
         <div class="paper-rating-list">
           {papers.map(({ page, rating }) => {
-            if (rating.rated) ratedRank += 1
-            const rank = rating.rated ? ratedRank : "—"
+            if (rating.status === "complete") ratedRank += 1
+            const rank =
+              rating.status === "complete"
+                ? ratedRank
+                : rating.status === "business-only"
+                  ? "业务"
+                  : "—"
             const title = page.frontmatter?.title ?? "Untitled"
             const href = resolveRelative(fileData.slug!, page.slug as FullSlug)
+            const cardClass =
+              rating.status === "complete"
+                ? "is-rated"
+                : rating.status === "business-only"
+                  ? "is-business-only"
+                  : "is-pending"
+            const rankLabel =
+              rating.status === "complete"
+                ? `第 ${rank} 名`
+                : rating.status === "business-only"
+                  ? "仅评价业务契合度"
+                  : "待评价"
+            const totalLabel =
+              rating.status === "complete"
+                ? rating.total
+                : rating.status === "business-only"
+                  ? "仅业务"
+                  : "待评"
 
             return (
-              <article class={`paper-rating-card ${rating.rated ? "is-rated" : "is-pending"}`}>
-                <div
-                  class="paper-rating-rank"
-                  aria-label={rating.rated ? `第 ${rank} 名` : "待评价"}
-                >
+              <article
+                class={`paper-rating-card ${cardClass}`}
+                data-paper-rating
+                data-rating-slug={page.slug}
+                data-rating-title={title}
+                data-default-business-fit={rating.businessFit}
+                data-default-paper-solidity={rating.paperSolidity}
+              >
+                <div class="paper-rating-rank" data-rating-rank aria-label={rankLabel}>
                   {rank}
                 </div>
                 <div class="paper-rating-paper">
@@ -133,21 +240,40 @@ export default ((options: PaperRatingOptions) => {
                     </a>
                   </h3>
                   <div class="paper-rating-metrics">
-                    <RatingMetric label="业务契合度" score={rating.businessFit} />
-                    <RatingMetric label="Paper solid 度" score={rating.paperSolidity} />
+                    <RatingMetric
+                      label="业务契合度"
+                      score={rating.businessFit}
+                      metric="businessFit"
+                    />
+                    <RatingMetric
+                      label="Paper solid 度"
+                      score={rating.paperSolidity}
+                      metric="paperSolidity"
+                      emptyLabel={rating.status === "business-only" ? "未评（未读）" : "待评价"}
+                    />
                   </div>
                 </div>
                 <div class="paper-rating-total">
-                  <strong>{rating.rated ? rating.total : "待评"}</strong>
-                  <span>{rating.rated ? "/ 10" : ""}</span>
+                  <strong data-rating-total>{totalLabel}</strong>
+                  <span data-rating-total-suffix>{rating.status === "complete" ? "/ 10" : ""}</span>
                 </div>
               </article>
             )
           })}
         </div>
 
+        <div class="paper-rating-actions">
+          <button type="button" data-copy-paper-ratings>
+            复制本机评分
+          </button>
+          <button type="button" class="secondary" data-clear-paper-ratings>
+            清除本机评分
+          </button>
+        </div>
+
         <p class="paper-rating-footnote">
-          排序按总分降序；同分时优先业务契合度。任一维度未评分的论文统一放在已评分论文之后。
+          两项齐全才进入综合排名。只给业务契合度时归入“仅业务”，不把缺失的 solid
+          当成零分；完全未评的论文放在最后。点击星星只保存为当前浏览器的草稿，复制后发给维护者才能公开发布。
         </p>
       </section>
     )
@@ -209,6 +335,10 @@ export default ((options: PaperRatingOptions) => {
   opacity: 0.82;
 }
 
+.paper-rating-card.is-business-only {
+  border-left: 3px solid var(--tertiary);
+}
+
 .paper-rating-rank {
   display: grid;
   place-items: center;
@@ -234,7 +364,7 @@ export default ((options: PaperRatingOptions) => {
 
 .paper-rating-metric {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: auto auto auto auto;
   align-items: center;
   gap: 0.45rem;
   font-size: 0.82rem;
@@ -246,13 +376,41 @@ export default ((options: PaperRatingOptions) => {
 }
 
 .paper-rating-stars {
-  color: var(--tertiary);
-  letter-spacing: 0.04em;
+  display: inline-flex;
   white-space: nowrap;
 }
 
-.paper-rating-stars .star-empty {
+.paper-rating-star {
+  appearance: none;
+  padding: 0 0.04em;
+  border: 0;
+  color: var(--tertiary);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.paper-rating-star.star-empty {
   color: var(--gray);
+}
+
+.paper-rating-star:hover,
+.paper-rating-star:focus-visible {
+  color: var(--tertiary);
+  transform: translateY(-1px);
+}
+
+.paper-rating-clear {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  color: var(--gray);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.75rem;
+  text-decoration: underline;
 }
 
 .paper-rating-value {
@@ -279,6 +437,29 @@ export default ((options: PaperRatingOptions) => {
 
 .paper-rating-footnote {
   margin: 0.75rem 0 0;
+}
+
+.paper-rating-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.paper-rating-actions button {
+  appearance: none;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--secondary);
+  border-radius: 8px;
+  color: var(--light);
+  background: var(--secondary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.paper-rating-actions button.secondary {
+  color: var(--secondary);
+  background: transparent;
 }
 
 .paper-rating-badge {
@@ -323,7 +504,7 @@ export default ((options: PaperRatingOptions) => {
   }
 
   .paper-rating-metric {
-    grid-template-columns: 7rem auto 1fr;
+    grid-template-columns: 7rem auto auto auto;
   }
 }
 `

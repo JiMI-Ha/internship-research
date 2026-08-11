@@ -49,6 +49,10 @@ export const defaultListPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.ConditionalRender({
+      component: Component.PaperRecommendation(),
+      condition: (page) => page.fileData.slug === "rl/reward-resemble/index",
+    }),
+    Component.ConditionalRender({
       component: Component.PaperRating({ variant: "board" }),
       condition: (page) => page.fileData.slug === "rl/reward-resemble/index",
     }),

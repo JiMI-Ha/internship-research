@@ -10,6 +10,11 @@ modified: 2026-08-12
 ## 论文列表
 
 - **OPD / MOPD**：[[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]] — 多教师蒸馏、能力整合、Top-k support、工业部署
+- **OPD / MOPD 逐篇站内解读**：39 篇论文均有独立 Motivation、Method、Experimental Setup、Results 与局限页面。
+  - A. 直接方法、改进与诊断：[[opd/mopd/mimo-v2-flash|MiMo-V2-Flash Technical Report]]、[[opd/mopd/nemotron-cascade-2|Nemotron-Cascade 2]]、[[opd/mopd/copd|Co-Evolving Policy Distillation（CoPD）]]、[[opd/mopd/camopd|Counteraction-Aware MOPD（CaMOPD）]]、[[opd/mopd/mopd|MOPD: Multi-Teacher On-Policy Distillation]]、[[opd/mopd/deepseek-v4|DeepSeek-V4]]、[[opd/mopd/h-opd|H-OPD: Heterogeneous Multi-Teacher Multimodal OPD]]、[[opd/mopd/ui-mopd|UI-MOPD]]、[[opd/mopd/top-k-misses-decision|When Top-K Misses the Decision]]、[[opd/mopd/promptsd|PROMPTSD]]、[[opd/mopd/regen|REGEN]]、[[opd/mopd/physics-multi-turn-planning|The Physics of Multi-Turn Long-Horizon Planning]]、[[opd/mopd/smopd|SMOPD]]、[[opd/mopd/ls-mopd|LS-MOPD]]
+  - B. 工业模型与技术报告：[[opd/mopd/baichuan-m3|Baichuan-M3]]、[[opd/mopd/glm-5|GLM-5]]、[[opd/mopd/kat-coder-v2|KAT-Coder-V2]]、[[opd/mopd/kwai-keye-vl-2|Kwai Keye-VL-2.0]]、[[opd/mopd/nemotron-3-ultra|Nemotron 3 Ultra]]、[[opd/mopd/nebulaexp-8b|NebulaExp-8B]]、[[opd/mopd/kat-coder-v2-5|KAT-Coder-V2.5]]、[[opd/mopd/mach-mind-4-flash|Mach-Mind-4-Flash]]、[[opd/mopd/solar-open-2|Solar Open 2]]、[[opd/mopd/motif-3|Motif 3]]、[[opd/mopd/orbit|ORBIT]]
+  - C. OPD、参数合并与知识融合基础：[[opd/mopd/gkd|GKD: On-Policy Distillation of Language Models]]、[[opd/mopd/minillm|MiniLLM]]、[[opd/mopd/rethinking-opd|Rethinking On-Policy Distillation]]、[[opd/mopd/simple-opd|Simple-OPD]]、[[opd/mopd/tide-mismatch-matters|TIDE: Mismatch Matters]]、[[opd/mopd/opd-survey|A Survey of On-Policy Distillation for LLMs]]、[[opd/mopd/model-soups|Model Soups]]、[[opd/mopd/task-arithmetic|Task Arithmetic]]、[[opd/mopd/ties-merging|TIES-Merging]]、[[opd/mopd/dare|DARE]]、[[opd/mopd/adamerging|AdaMerging]]、[[opd/mopd/fusellm|FuseLLM]]、[[opd/mopd/fusechat|FuseChat]]、[[opd/mopd/nemotron-cascade|Nemotron-Cascade]]
+
 - **RL / Experience Replay 专题**：[[rl/experience-replay/|28 篇逐篇 Motivation / Method / Results]] — [[rl/experience-replay/rlep-experience-replay|研究地图]]
 - **RL / Experience Replay**：[[rl/experience-replay/rlep|RLEP]] — 两阶段成功轨迹回放
 - **RL / Experience Replay**：[[rl/experience-replay/exgrpo|ExGRPO]] — 经验价值与 mixed-policy objective

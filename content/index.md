@@ -20,7 +20,7 @@ modified: 2026-08-12
 
 `OPD` · `MOPD` · `39 篇逐篇 Motivation / Method / Results`
 
-逐篇拆解 39 项 MOPD 核心方法、直接改进、工业应用与基础工作；每篇都单独写 Motivation、Method 和 Results，并区分组件级证据与只报告最终模型成绩的技术报告。
+收录 39 篇站内独立论文解读；每篇直接给出 Motivation、Method、Experimental Setup、Results、Limitations 与 Takeaways，不再把论文标题直接跳转到外站。
 
 - **Motivation**：Mixed-RL 会耦合不同 reward 与训练预算，离线模仿有 exposure bias，参数平均又容易发生专家干涉。
 - **Method**：从统一学生分叉训练同源专家，再把学生 rollout 路由给对应教师，用 reverse-KL、log-ratio policy gradient 或 support-aware logits 更新学生。

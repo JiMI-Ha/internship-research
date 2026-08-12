@@ -18,9 +18,9 @@ modified: 2026-08-12
 
 ### [[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]]
 
-`OPD` · `MOPD` · `专题调研近 40 项工作`
+`OPD` · `MOPD` · `39 篇逐篇 Motivation / Method / Results`
 
-MOPD 让学生在自己的 rollout 上接受领域教师的 token 级监督，以一次训练把数学、代码、指令遵循、工具调用等专家能力整合到统一模型；真正的边界是教师距离、prompt 路由和决策 token support。
+逐篇拆解 39 项 MOPD 核心方法、直接改进、工业应用与基础工作；每篇都单独写 Motivation、Method 和 Results，并区分组件级证据与只报告最终模型成绩的技术报告。
 
 - **Motivation**：Mixed-RL 会耦合不同 reward 与训练预算，离线模仿有 exposure bias，参数平均又容易发生专家干涉。
 - **Method**：从统一学生分叉训练同源专家，再把学生 rollout 路由给对应教师，用 reverse-KL、log-ratio policy gradient 或 support-aware logits 更新学生。

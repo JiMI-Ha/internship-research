@@ -12,7 +12,7 @@ tags: [MOPD, OPD, multi-teacher, capability-integration, model-merging]
 
 ## 核心调研
 
-- [[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]] — 梳理近 40 项相关工作，覆盖 Motivation、Method、Experimental Setup、Results、Ablation、Limitations、工程选型与推荐阅读顺序。
+- [[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]] — 对 39 篇相关论文逐篇整理 Motivation、Method 和 Results，并补充横向实验、失败机制、局限与工程选型。
 
 ## 收录范围
 

@@ -5,17 +5,21 @@ published: 2026-08-11
 modified: 2026-08-12
 ---
 
-强化学习相关调研，关注训练目标、奖励设计、策略优化以及多目标对齐。
+强化学习相关调研，关注训练目标、奖励设计、经验复用、策略优化以及多目标对齐。
 
 ## 系列
 
+- [[rl/experience-replay/|Experience Replay：LLM 经验复用与 Off-Policy RL]] — rollout reuse、buffer 管理、hard-sample rescue 与 off-policy 稳定性。
 - [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]] — 奖励设计、Reward Model、多目标聚合与约束优化，并按主编评分排序。
 
 ## 论文
 
+### Experience Replay
+
+- [[rl/experience-replay/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]]
+
 ### Reward Resemble 扩展阅读
 
-- [[rl/reward-resemble/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]]
 - [[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]]
 - [[rl/reward-resemble/rubrics-as-rewards|RaR：把实例级 Rubric 直接变成强化学习奖励]]
 - [[rl/reward-resemble/ares|ARES：从预训练文档自动合成 Rubric 强化学习数据]]

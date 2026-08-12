@@ -16,7 +16,7 @@ modified: 2026-08-12
 
 ## 最新调研
 
-### [[rl/reward-resemble/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]]
+### [[rl/experience-replay/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]]
 
 `RL` · `Experience Replay` · `专题调研 27 项工作`
 
@@ -26,7 +26,7 @@ RLEP 用“第一轮 RL 建成功轨迹库、第二轮从 base model 重训”�
 - **Method**：系统比较完整轨迹、prefix/state、外部专家、value/search replay 与稳定性目标。
 - **Results**：RLEP 将 AIME 2024 达到 baseline 峰值的步数从 380 降至 135，best accuracy 由 38.2% 提至 39.9%；证据仍限于单一 7B 数学模型。
 
-[[rl/reward-resemble/rlep-experience-replay|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 47 篇研究地图 →]]
+[[rl/experience-replay/rlep-experience-replay|阅读全文 →]] · [[rl/experience-replay/|查看 Experience Replay 专题地图 →]]
 
 ### [[rl/reward-resemble/lemur|LEMUR：从多位教师偏好联合学习多目标 Reward 与 Policy]]
 
@@ -38,7 +38,7 @@ LEMUR 为不同偏好来源分别学习 objective-specific reward model，再用
 - **Method**：分教师学习 RM，用最新 reward 动态重标 replay buffer，再优化多目标策略。
 - **Results**：四个控制环境的 Pareto 曲线更接近 oracle；但教师是 scripted，尚非真实人类或 LLM 场景。
 
-[[rl/reward-resemble/lemur|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 47 篇研究地图 →]]
+[[rl/reward-resemble/lemur|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 46 篇研究地图 →]]
 
 ### [[rl/reward-resemble/prism|PRISM：不要混合奖励，而要组合策略]]
 

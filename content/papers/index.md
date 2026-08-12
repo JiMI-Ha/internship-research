@@ -9,7 +9,7 @@ modified: 2026-08-12
 
 ## 论文列表
 
-- **RL / Experience Replay**：[[rl/reward-resemble/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]] — 成功轨迹复用、buffer 管理、off-policy 稳定性
+- **RL / Experience Replay**：[[rl/experience-replay/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]] — 成功轨迹复用、buffer 管理、off-policy 稳定性
 - **RL / Reward Resemble**：[[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]] — 多奖励归一化、GRPO
 - **RL / Reward Resemble**：[[rl/reward-resemble/rubrics-as-rewards|RaR：把实例级 Rubric 直接变成强化学习奖励]] — rubric reward、开放域 RL
 - **RL / Reward Resemble**：[[rl/reward-resemble/ares|ARES：从预训练文档自动合成 Rubric 强化学习数据]] — rubric synthesis、数据扩展

@@ -44,6 +44,8 @@ modified: 2026-08-12
 - **RL / Experience Replay**：[[rl/experience-replay/asymmetric-reinforce|Asymmetric REINFORCE]] — 正负奖励非对称更新
 - **RL / Experience Replay**：[[rl/experience-replay/m2po|M2PO]] — second-moment trust constraint
 - **RL / Experience Replay**：[[rl/experience-replay/revisiting-grpo-off-policy|Revisiting GRPO]] — on/off-policy 边界分析
+- **RL / Reward Resemble**：[[rl/reward-resemble/saw|SAW：按奖励信息量动态调权，缓解多目标异步饱和]] — CV 动态权重、GRPO/GDPO
+- **RL / Reward Resemble**：[[rl/reward-resemble/dynamic-reward-weighting|Dynamic Reward Weighting：在线重分配多目标对齐预算]] — hypervolume、梯度动态调权、Pareto
 - **RL / Reward Resemble**：[[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]] — 多奖励归一化、GRPO
 - **RL / Reward Resemble**：[[rl/reward-resemble/rubrics-as-rewards|RaR：把实例级 Rubric 直接变成强化学习奖励]] — rubric reward、开放域 RL
 - **RL / Reward Resemble**：[[rl/reward-resemble/ares|ARES：从预训练文档自动合成 Rubric 强化学习数据]] — rubric synthesis、数据扩展

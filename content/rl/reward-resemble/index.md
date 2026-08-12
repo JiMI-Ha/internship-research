@@ -52,6 +52,8 @@ tags:
 
 ### 多目标 Trade-off 与可控策略
 
+- [[rl/reward-resemble/saw|SAW：按奖励信息量动态调权，缓解多目标异步饱和]] — 用 batch 级 CV 把训练预算从低信息量 reward 转向高信息量 reward。
+- [[rl/reward-resemble/dynamic-reward-weighting|Dynamic Reward Weighting：在线重分配多目标对齐预算]] — 用 hypervolume meta-reward 或逐目标梯度影响量动态改变训练信号。
 - [[rl/reward-resemble/armorm-moe|ArmoRM-MoE：用多维绝对评分和门控学习可解释偏好]] — prompt-conditioned gate 学习属性权重。
 - [[rl/reward-resemble/projection-optimization|MOPO：用投影迭代实现非线性多目标与多群体 RLHF]] — 用非线性聚合突破线性 scalarization。
 - [[rl/reward-resemble/directional-preference-alignment|DPA：用偏好方向控制 Helpfulness–Verbosity Trade-off]] — 在权重空间用方向调节偏好。

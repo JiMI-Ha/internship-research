@@ -26,6 +26,8 @@ modified: 2026-08-12
 
 ### Reward Resemble 扩展阅读
 
+- [[rl/reward-resemble/saw|SAW：按奖励信息量动态调权，缓解多目标异步饱和]]
+- [[rl/reward-resemble/dynamic-reward-weighting|Dynamic Reward Weighting：在线重分配多目标对齐预算]]
 - [[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]]
 - [[rl/reward-resemble/rubrics-as-rewards|RaR：把实例级 Rubric 直接变成强化学习奖励]]
 - [[rl/reward-resemble/ares|ARES：从预训练文档自动合成 Rubric 强化学习数据]]

@@ -16,6 +16,30 @@ modified: 2026-08-12
 
 ## 最新调研
 
+### [[rl/reward-resemble/saw|SAW：按奖励信息量动态调权，缓解多目标异步饱和]]
+
+`RL` · `Reward Resemble 系列` · `动态奖励权重`
+
+SAW 保留线性奖励求和，用当前 batch 中各奖励维度的变异系数估计实时信息量：已趋同维度降权，仍有区分度的维度升权。
+
+- **Motivation**：多奖励的学习速度不同；固定权重会让已饱和维度的残余噪声继续干扰 GRPO/GDPO 更新。
+- **Method**：按 $\mathrm{CV}_k=\sigma_k/(\mu_k+\delta)$ 的相对占比分配 reward 或 advantage 权重，不增加额外反向传播。
+- **Results**：BFCL-v4 总体准确率提升 0.08–1.04 个百分点；相对等权基线单步开销低于 3%，但实验只覆盖双奖励设置。
+
+[[rl/reward-resemble/saw|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 研究地图 →]]
+
+### [[rl/reward-resemble/dynamic-reward-weighting|Dynamic Reward Weighting：在线重分配多目标对齐预算]]
+
+`RL` · `Reward Resemble 系列` · `TACL 2026`
+
+这项工作用 hypervolume meta-reward 或逐目标梯度影响量代替全程固定权重，在正确性、简洁性与清晰度之间在线调整训练信号。
+
+- **Motivation**：目标饱和速度不同，固定线性标量化又无法覆盖非凸 Pareto 前沿。
+- **Method**：一条路线奖励验证集 hypervolume 增量；另一条路线按目标梯度与总梯度的内积做指数化权重更新。
+- **Results**：梯度法在 GRPO/REINFORCE 上形成更优经验前沿，达到前沿所需步数平均减少 6.1；代价是逐目标梯度和更强的训练假设。
+
+[[rl/reward-resemble/dynamic-reward-weighting|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 研究地图 →]]
+
 ### [[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]]
 
 `OPD` · `MOPD` · `39 篇逐篇 Motivation / Method / Results`
@@ -42,7 +66,7 @@ modified: 2026-08-12
 
 ### [[rl/reward-resemble/lemur|LEMUR：从多位教师偏好联合学习多目标 Reward 与 Policy]]
 
-`RL` · `Reward Resemble 系列` · `本轮新增 39 篇`
+`RL` · `Reward Resemble 系列` · `本轮新增 41 篇`
 
 LEMUR 为不同偏好来源分别学习 objective-specific reward model，再用 MORL 训练一组 trade-off policy；它提醒我们不要把冲突教师的反馈直接池化成单一 RM。
 
@@ -50,7 +74,7 @@ LEMUR 为不同偏好来源分别学习 objective-specific reward model，再用
 - **Method**：分教师学习 RM，用最新 reward 动态重标 replay buffer，再优化多目标策略。
 - **Results**：四个控制环境的 Pareto 曲线更接近 oracle；但教师是 scripted，尚非真实人类或 LLM 场景。
 
-[[rl/reward-resemble/lemur|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 46 篇研究地图 →]]
+[[rl/reward-resemble/lemur|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 48 篇研究地图 →]]
 
 ### [[rl/reward-resemble/prism|PRISM：不要混合奖励，而要组合策略]]
 

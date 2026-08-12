@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 4
+paper_solidity: 5
 tags: [paper, RL, off-policy, staleness, trust-region, stability]
 source_url: https://arxiv.org/abs/2510.01161
 ---

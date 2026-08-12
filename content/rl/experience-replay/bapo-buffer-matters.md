@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 5
+paper_solidity: 5
 tags: [paper, RL, RLVR, experience-replay, buffer, off-policy]
 source_url: https://arxiv.org/abs/2602.20722
 ---

@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 4
+paper_solidity: 4
 tags: [paper, RL, RLVR, data-selection, experience-replay, efficiency]
 source_url: https://arxiv.org/abs/2506.05316
 ---

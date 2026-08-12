@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 2
+paper_solidity: 1
 tags: [paper, RL, experience-replay, prefix, off-policy]
 source_url: https://openreview.net/forum?id=AoCqLYhTD8
 ---

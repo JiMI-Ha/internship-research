@@ -15,6 +15,26 @@ tags:
 > [!abstract] 独立专题
 > 这里收录 28 个逐篇条目。每一种方法都有独立的 Motivation、Method、Experimental Setup、Results、Ablation、Limitations、Takeaways 与原文链接；[[rl/experience-replay/rlep-experience-replay|研究地图]]只负责分支导航。
 
+## 排行与评分口径
+
+页面顶部固定展示两份彼此独立的榜单：先按方法是否覆盖三类机制给 **0–3 分**，再按主编判断给 **业务契合度**与 **Paper solid 度**各 1–5 星。机制榜按“专项分 → 业务星级 → solid 星级 → 标题”排序；双五星榜按两项总分排序，总分相同时业务分更高者优先。
+
+- **业务契合度**：重点看方法是否直接解决监督数据混入 RL、历史经验复用或 off-policy 稳定性，同时考虑工程侵入性、算力收益和迁移到现有 RLVR 流程的难度。
+- **Paper solid 度**：综合问题定义、公式与算法闭环、实验覆盖、对照公平性、消融、统计证据及结论边界。博客组件、正文尚未可靠取得或未隔离 replay 增益的材料会降级评分。
+- **星级含义**：5 星为当前最值得优先复现或证据最完整的一档；4 星为较强但仍有适用条件；3 星为可参考但证据或迁移性一般；2 星及以下表示证据明显受限，不等于方法一定无效。
+
+评分是当前业务视角下的主编判断，不是论文的客观价值；后续有新版本、复现实验或业务约束变化时可以调整。
+
+## 三项机制覆盖分
+
+以下三项各命中一项加 1 分，满分 3 分。它只回答“方法设计有没有直接涉及”，不评价效果大小或论文质量。
+
+1. **SFT / DPO / 专家示范混入 RL**：监督、偏好、蒸馏、离线轨迹或专家解答进入 RL batch，或与 RL 更新交错执行。
+2. **Replay buffer / 历史轨迹缓存**：显式保存并再次使用历史 rollout、prefix、中间状态、正确解答或失败经验。
+3. **显式缓解 off-policy**：使用 behavior probability、importance correction、分离 advantage、FIFO / 年龄窗口、重写、动态权重、trust constraint、value-based / trajectory-balance 等专用目标，或避免用陈旧经验直接更新 actor。
+
+边界口径：KDRL 的教师蒸馏、SPO 的 offline trajectory、RRL 的 canonical-solution prefix 都按广义监督 / 专家数据计第 1 分，并在榜单证据里明示；只把历史样本混回训练、却没有额外处理 policy gap 或 staleness，不自动获得第 3 分。ReLIFT 的第 3 分来自把外部示范隔离到交错 SFT 并动态刷新困难集合，而不是 importance correction。
+
 ## 核心问题
 
 1. **经验价值**：完整成功轨迹、失败 prefix、中间状态、专家答案和搜索节点，哪一种最值得重复训练？

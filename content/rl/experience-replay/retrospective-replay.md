@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 3
+paper_solidity: 3
 tags: [paper, RL, reasoning, experience-replay, prefix, exploration]
 source_url: https://arxiv.org/abs/2504.14363
 ---

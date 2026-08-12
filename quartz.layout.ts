@@ -21,7 +21,8 @@ export const defaultContentPageLayout: PageLayout = {
       component: Component.PaperRating({ variant: "badge" }),
       condition: (page) =>
         page.fileData.frontmatter?.type === "paper" &&
-        (page.fileData.frontmatter?.tags ?? []).includes("reward-resemble"),
+        ((page.fileData.frontmatter?.tags ?? []).includes("reward-resemble") ||
+          page.fileData.slug?.startsWith("rl/experience-replay/") === true),
     }),
     Component.ReaderMode(),
   ],
@@ -49,12 +50,27 @@ export const defaultListPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.ConditionalRender({
-      component: Component.PaperRecommendation(),
+      component: Component.PaperRecommendation({ topic: "reward-resemble" }),
       condition: (page) => page.fileData.slug === "rl/reward-resemble/index",
     }),
     Component.ConditionalRender({
-      component: Component.PaperRating({ variant: "board" }),
+      component: Component.PaperRating({
+        variant: "board",
+        topicSlug: "rl/reward-resemble",
+      }),
       condition: (page) => page.fileData.slug === "rl/reward-resemble/index",
+    }),
+    Component.ConditionalRender({
+      component: Component.PaperRecommendation({ topic: "experience-replay" }),
+      condition: (page) => page.fileData.slug === "rl/experience-replay/index",
+    }),
+    Component.ConditionalRender({
+      component: Component.PaperRating({
+        variant: "board",
+        topicSlug: "rl/experience-replay",
+        boardTitle: "Experience Replay 论文评分榜",
+      }),
+      condition: (page) => page.fileData.slug === "rl/experience-replay/index",
     }),
     Component.ReaderMode(),
   ],

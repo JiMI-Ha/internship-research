@@ -5,6 +5,8 @@ import { classNames } from "../util/lang"
 
 type PaperRatingOptions = {
   variant: "board" | "badge"
+  topicSlug?: string
+  boardTitle?: string
 }
 
 export type Rating = {
@@ -159,10 +161,10 @@ export default ((options: PaperRatingOptions) => {
       )
     }
 
+    const topicSlug = options.topicSlug ?? "rl/reward-resemble"
     const papers = allFiles
       .filter(
-        (page) =>
-          page.slug?.startsWith("rl/reward-resemble/") && page.frontmatter?.type === "paper",
+        (page) => page.slug?.startsWith(`${topicSlug}/`) && page.frontmatter?.type === "paper",
       )
       .map((page) => ({ page, rating: getRating(page) }))
       .sort((left, right) => {
@@ -186,7 +188,7 @@ export default ((options: PaperRatingOptions) => {
         <div class="paper-rating-board-heading">
           <div>
             <p class="paper-rating-kicker">EDITOR'S RATING</p>
-            <h2 id="rating-board-title">论文评分榜</h2>
+            <h2 id="rating-board-title">{options.boardTitle ?? "论文评分榜"}</h2>
           </div>
           <p>先看业务契合度；读过后再评 Paper solid 度</p>
         </div>

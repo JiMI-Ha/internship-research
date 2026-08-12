@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 4
+paper_solidity: 3
 tags: [paper, RL, RLVR, experience-replay, exploration, multimodal]
 source_url: https://arxiv.org/abs/2506.22200
 ---

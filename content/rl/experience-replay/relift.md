@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 5
+paper_solidity: 5
 tags: [paper, RLVR, SFT, expert-trajectory, hard-sample]
 source_url: https://arxiv.org/abs/2506.07527
 ---

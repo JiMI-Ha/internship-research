@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 4
+paper_solidity: 3
 tags: [paper, RL, GUI-agent, experience-replay, GRPO]
 source_url: https://arxiv.org/abs/2505.16282
 ---

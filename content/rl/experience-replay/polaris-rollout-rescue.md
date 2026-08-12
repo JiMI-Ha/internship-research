@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 4
+paper_solidity: 2
 tags: [RL, RLVR, experience-replay, rollout-rescue, engineering]
 source_url: https://hkunlp.github.io/blog/2025/Polaris
 ---

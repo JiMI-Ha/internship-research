@@ -29,8 +29,40 @@ export const recommendationCriteria = [
   },
 ] as const
 
-export type RecommendationCriterionKey = (typeof recommendationCriteria)[number]["key"]
+export const experienceReplayCriteria = [
+  {
+    key: "supervisedData",
+    shortLabel: "SFT / DPO 数据",
+    label: "SFT / DPO / 专家示范混入 RL",
+    description: "监督、偏好、蒸馏或专家示范数据进入 RL batch，或与 RL 更新交错执行。",
+  },
+  {
+    key: "replayBuffer",
+    shortLabel: "Replay Buffer",
+    label: "Replay buffer / 历史轨迹缓存",
+    description: "显式保存并再次使用历史 rollout、prefix、中间状态、解答或失败经验。",
+  },
+  {
+    key: "offPolicyMitigation",
+    shortLabel: "Off-policy 缓解",
+    label: "显式缓解 Off-policy",
+    description: "用校正、限龄、重写、动态权重或专用目标处理 policy gap / stale data。",
+  },
+] as const
+
+export type RecommendationCriterionKey = string
 export type RecommendationEvidence = Partial<Record<RecommendationCriterionKey, string>>
+
+type RecommendationCriterion = {
+  key: string
+  shortLabel: string
+  label: string
+  description: string
+}
+
+type PaperRecommendationOptions = {
+  topic?: "reward-resemble" | "experience-replay"
+}
 
 export type Recommendation = {
   evidence: RecommendationEvidence
@@ -73,6 +105,11 @@ export const paperRecommendationEvidence: Record<string, RecommendationEvidence>
   "directional-preference-alignment": {
     rewardComposition: "在多目标 reward 空间按用户指定方向组合 helpfulness 与 verbosity。",
     scale: "用单位方向和归一化 reward 向量计算方向分数。",
+  },
+  "dynamic-reward-weighting": {
+    rewardComposition: "用 hypervolume 进展或逐目标梯度影响量动态调整多目标训练信号。",
+    scale: "Hypervolume 方案直接对下一步线性 reward 做自适应整体缩放。",
+    gradientConflict: "梯度方案用目标梯度与总梯度的内积识别协同或冲突，并据此更新权重。",
   },
   encore: {
     rewardComposition: "按评分熵为多头 safety reward 动态加权。",
@@ -168,6 +205,10 @@ export const paperRecommendationEvidence: Record<string, RecommendationEvidence>
     positiveNegative: "显式形式为平均奖励减去跨目标方差惩罚，防止目标间补偿。",
     scale: "直接解决原始 reward 尺度支配，并继承 GDPO 的尺度无关性。",
   },
+  saw: {
+    rewardComposition: "按各 reward 当前信息量动态重分配多目标聚合权重。",
+    scale: "用对乘法尺度不变的变异系数跨 reward 比较，并保持 GDPO advantage 尺度。",
+  },
   "safe-rlhf": {
     rewardComposition: "分离 helpfulness reward 与 harmlessness cost，并用拉格朗日乘子动态组合。",
     positiveNegative: "目标显式最大化 reward，同时惩罚超出安全阈值的 cost。",
@@ -186,15 +227,126 @@ export const paperRecommendationEvidence: Record<string, RecommendationEvidence>
   },
 }
 
-export function createRecommendation(evidence: RecommendationEvidence = {}): Recommendation {
+export const experienceReplayEvidence: Record<string, RecommendationEvidence> = {
+  rlep: {
+    replayBuffer: "先用一轮 RL 的成功轨迹建库，再从同一基座重训并混入历史正确答案。",
+  },
+  exgrpo: {
+    replayBuffer: "保存历史成功轨迹，并按问题价值与轨迹熵选择回放样本。",
+    offPolicyMitigation: "保留行为概率并使用 mixed-policy objective 处理历史策略轨迹。",
+  },
+  "bapo-buffer-matters": {
+    replayBuffer: "同时缓存待重试难题与近期高质量 rollout。",
+    offPolicyMitigation: "限制 buffer 新鲜度，并对历史样本做显式 off-policy correction。",
+  },
+  "replay-enhanced-repo": {
+    replayBuffer: "训练中持续积累早期 rollout，并异步检索后混回更新。",
+    offPolicyMitigation: "分别归一化 on-policy 与 replay advantage，并保留行为概率。",
+  },
+  "dots-rollout-replay": {
+    replayBuffer: "FIFO buffer 保存近期 rollout group，并替换部分新生成样本。",
+    offPolicyMitigation: "用 FIFO freshness 和难度重估限制陈旧数据的分布偏移。",
+  },
+  eframe: {
+    replayBuffer: "对困难题扩大探索，过滤出的 gold trajectories 写入 buffer 后回放。",
+  },
+  remix: {
+    replayBuffer: "训练前期按固定比例混入历史 rollout，提高 update-to-data ratio。",
+    offPolicyMitigation: "阶段后切回纯 on-policy，并重置 reference policy 控制分布漂移。",
+  },
+  "efficient-rl-experience-replay": {
+    replayBuffer: "系统研究 FIFO buffer、容量、replay ratio 与正样本偏置采样。",
+    offPolicyMitigation: "显式扫描 staleness，并采用更耐陈旧样本的更新设计。",
+  },
+  "polaris-rollout-rescue": {
+    replayBuffer: "当前 group 全失败时，从 earlier-epoch buffer 注入一条历史正确答案。",
+  },
+  arpo: {
+    replayBuffer: "FIFO 经验池保存 GUI agent 的历史非零奖励轨迹。",
+    offPolicyMitigation: "只在全零组按需注入，并以 FIFO 淘汰过旧交互降低 staleness。",
+  },
+  "kimi-k1-5": {
+    replayBuffer: "大型 RL recipe 缓存完整与部分 rollout，降低时间相关性并复用生成。",
+  },
+  "retrospective-replay": {
+    supervisedData: "从历史轨迹及 canonical solution 中抽取高价值 prefix，再纳入 RL 续写。",
+    replayBuffer: "回放 critic 选出的中间推理状态，而不是只复用完整正确答案。",
+  },
+  poer: {
+    replayBuffer: "保留失败轨迹中仍正确或有希望的早期 prefix，引导后续完成。",
+  },
+  "trajectory-balance-asynchrony": {
+    replayBuffer: "异步 searcher 持续向共享 replay buffer 供给多样轨迹。",
+    offPolicyMitigation: "使用适配异步历史数据的 trajectory-balance loss，而非直接套 PPO ratio。",
+  },
+  reval: {
+    replayBuffer: "FIFO replay buffer 在 fresh 收集之间反复训练历史轨迹。",
+    offPolicyMitigation: "用 Bellman residual 的 value-based 目标与 KL 正则控制策略漂移。",
+  },
+  deepsearch: {
+    replayBuffer: "MCTS 配合 adaptive replay buffer 和 verified-solution cache 复用搜索经验。",
+  },
+  luffy: {
+    supervisedData: "on-policy rollout 全失败时，把强模型正确轨迹混入 policy update。",
+    offPolicyMitigation:
+      "用 mixed-policy advantage 与 regularized importance sampling 缩小 policy gap。",
+  },
+  "rephrasing-repo": {
+    supervisedData: "专家答案经当前模型改写和验证后，替换低奖励 rollout 进入 RL。",
+    offPolicyMitigation: "把专家答案改写成当前 policy 的表达，从数据层缩小 policy gap。",
+  },
+  relift: {
+    supervisedData: "在在线 RL 更新之间，对困难题高质量示范执行监督微调。",
+    replayBuffer: "把当前最困难问题的高质量解存入专用 buffer。",
+    offPolicyMitigation: "将外部示范隔离在交错 SFT 更新中，并动态刷新困难集合。",
+  },
+  chord: {
+    supervisedData: "同时优化 on-policy GRPO loss 与 off-policy expert SFT loss。",
+    offPolicyMitigation: "按模型对专家 token 的掌握程度动态加权并逐步退火监督。",
+  },
+  kdrl: {
+    supervisedData: "把教师推理分布的知识蒸馏目标与 verifier RL 统一训练。",
+    offPolicyMitigation: "用 KD/RL annealing 和 token masking 控制教师—学生分布差距。",
+  },
+  poets: {
+    replayBuffer: "policy ensemble 在 replay 数据上更新并维持不同探索假设。",
+    offPolicyMitigation: "以 ensemble uncertainty 和 Thompson sampling 缓解重复经验过拟合。",
+  },
+  inspo: {
+    replayBuffer: "失败轨迹进入 replay buffer，供 instruction optimizer 反思。",
+    offPolicyMitigation: "历史失败不直接更新 actor，而用于进化 instruction，绕开陈旧策略梯度。",
+  },
+  "soft-policy-optimization": {
+    supervisedData: "half-online 设置以 50% offline trajectories 混合 50% online 数据。",
+    offPolicyMitigation: "为序列模型推导 soft off-policy Q-regression，可直接训练行为策略数据。",
+  },
+  "tapered-off-policy-reinforce": {
+    offPolicyMitigation: "用 tapered weighting 平滑降权远离当前 policy 的离线样本。",
+  },
+  "asymmetric-reinforce": {
+    offPolicyMitigation: "以保守负 baseline 非对称处理正负 reward，避免普通 ratio clipping 崩溃。",
+  },
+  m2po: {
+    offPolicyMitigation:
+      "约束 importance weight 的 second moment，延长 stale rollout 安全使用区间。",
+  },
+  "revisiting-grpo-off-policy": {
+    offPolicyMitigation: "推导 rollout 延迟与重复更新下的有效 loss 和 policy-improvement 边界。",
+  },
+}
+
+export function createRecommendation(
+  evidence: RecommendationEvidence = {},
+  criteria: readonly RecommendationCriterion[] = recommendationCriteria,
+): Recommendation {
   const hits = Object.fromEntries(
-    recommendationCriteria.map(({ key }) => [key, Boolean(evidence[key])]),
+    criteria.map(({ key }) => [key, Boolean(evidence[key])]),
   ) as Record<RecommendationCriterionKey, boolean>
 
   return {
     evidence,
     hits,
-    total: recommendationCriteria.filter(({ key }) => hits[key]).length,
+    total: criteria.filter(({ key }) => hits[key]).length,
   }
 }
 
@@ -202,27 +354,46 @@ export function compareRecommendations(left: Recommendation, right: Recommendati
   return right.total - left.total
 }
 
-export default (() => {
+export default ((options: PaperRecommendationOptions = {}) => {
+  const topic = options.topic ?? "reward-resemble"
+  const isExperienceReplay = topic === "experience-replay"
+  const criteria: readonly RecommendationCriterion[] = isExperienceReplay
+    ? experienceReplayCriteria
+    : recommendationCriteria
+  const evidenceByPaper = isExperienceReplay
+    ? experienceReplayEvidence
+    : paperRecommendationEvidence
+  const topicSlug = `rl/${topic}/`
+  const boardTitle = isExperienceReplay ? "三项机制覆盖榜" : "四项专项推荐榜"
+  const maxScore = criteria.length
+
   const PaperRecommendation: QuartzComponent = ({
     allFiles,
     fileData,
     displayClass,
   }: QuartzComponentProps) => {
     const papers = allFiles
-      .filter(
-        (page) =>
-          page.slug?.startsWith("rl/reward-resemble/") && page.frontmatter?.type === "paper",
-      )
+      .filter((page) => page.slug?.startsWith(topicSlug) && page.frontmatter?.type === "paper")
       .map((page) => {
         const key = page.slug?.split("/").at(-1) ?? ""
         return {
           page,
-          recommendation: createRecommendation(paperRecommendationEvidence[key]),
+          recommendation: createRecommendation(evidenceByPaper[key], criteria),
         }
       })
       .sort((left, right) => {
         const scoreDifference = compareRecommendations(left.recommendation, right.recommendation)
         if (scoreDifference !== 0) return scoreDifference
+
+        const businessDifference =
+          Number(right.page.frontmatter?.business_fit ?? 0) -
+          Number(left.page.frontmatter?.business_fit ?? 0)
+        if (businessDifference !== 0) return businessDifference
+
+        const solidityDifference =
+          Number(right.page.frontmatter?.paper_solidity ?? 0) -
+          Number(left.page.frontmatter?.paper_solidity ?? 0)
+        if (solidityDifference !== 0) return solidityDifference
 
         return String(left.page.frontmatter?.title).localeCompare(
           String(right.page.frontmatter?.title),
@@ -241,13 +412,13 @@ export default (() => {
         <div class="paper-recommendation-heading">
           <div>
             <p class="paper-recommendation-kicker">RULE-BASED RECOMMENDATION</p>
-            <h2 id="recommendation-board-title">四项专项推荐榜</h2>
+            <h2 id="recommendation-board-title">{boardTitle}</h2>
           </div>
-          <p>每项命中加 1 分，满分 4 分；同分按标题排序</p>
+          <p>每项命中加 1 分，满分 {maxScore} 分；同分依次看业务、solid 与标题</p>
         </div>
 
         <div class="paper-recommendation-rubric" aria-label="推荐榜评分口径">
-          {recommendationCriteria.map((criterion, index) => (
+          {criteria.map((criterion, index) => (
             <div class="paper-recommendation-rubric-item">
               <strong>
                 {index + 1}. {criterion.label}
@@ -266,7 +437,7 @@ export default (() => {
 
             const title = page.frontmatter?.title ?? "Untitled"
             const href = resolveRelative(fileData.slug!, page.slug as FullSlug)
-            const evidenceSummary = recommendationCriteria
+            const evidenceSummary = criteria
               .filter(({ key }) => recommendation.hits[key])
               .map(({ key }) => recommendation.evidence[key])
               .join("；")
@@ -286,7 +457,7 @@ export default (() => {
                     </a>
                   </h3>
                   <div class="paper-recommendation-criteria">
-                    {recommendationCriteria.map((criterion) => {
+                    {criteria.map((criterion) => {
                       const hit = recommendation.hits[criterion.key]
                       const detail = recommendation.evidence[criterion.key]
                       return (
@@ -307,7 +478,7 @@ export default (() => {
                 </div>
                 <div class="paper-recommendation-total" aria-label={`${recommendation.total} 分`}>
                   <strong>{recommendation.total}</strong>
-                  <span>/ 4</span>
+                  <span>/ {maxScore}</span>
                 </div>
               </article>
             )
@@ -315,9 +486,9 @@ export default (() => {
         </div>
 
         <p class="paper-recommendation-footnote">
-          这是按论文方法特征生成的固定推荐分，不代表论文质量，也不会读取或改动下方的业务契合度 /
-          Paper solid 度星级。参数规模的 scaling law
-          不算量纲问题；只说目标冲突、不处理冲突梯度，也不计梯度冲突分。
+          {isExperienceReplay
+            ? "这是机制覆盖分，不代表论文质量；仅使用历史数据但没有显式校正、限龄、重写或专用目标，不自动获得 Off-policy 缓解分。KD、offline trajectory 与 canonical prefix 归入广义监督 / 专家数据，并在卡片中明示证据。"
+            : "这是按论文方法特征生成的固定推荐分，不代表论文质量，也不会读取或改动下方的业务契合度 / Paper solid 度星级。参数规模的 scaling law 不算量纲问题；只说目标冲突、不处理冲突梯度，也不计梯度冲突分。"}
         </p>
       </section>
     )
@@ -502,4 +673,4 @@ export default (() => {
 `
 
   return PaperRecommendation
-}) satisfies QuartzComponentConstructor
+}) satisfies QuartzComponentConstructor<PaperRecommendationOptions>

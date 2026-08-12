@@ -4,6 +4,8 @@ created: 2026-08-12
 published: 2026-08-12
 modified: 2026-08-12
 type: paper
+business_fit: 5
+paper_solidity: 4
 tags: [paper, RLVR, off-policy, expert-trajectory, reasoning]
 source_url: https://arxiv.org/abs/2504.14945
 ---

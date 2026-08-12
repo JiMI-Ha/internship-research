@@ -2,7 +2,7 @@
 title: "RL"
 created: 2026-08-11
 published: 2026-08-11
-modified: 2026-08-11
+modified: 2026-08-12
 ---
 
 强化学习相关调研，关注训练目标、奖励设计、策略优化以及多目标对齐。
@@ -15,6 +15,7 @@ modified: 2026-08-11
 
 ### Reward Resemble 扩展阅读
 
+- [[rl/reward-resemble/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]]
 - [[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]]
 - [[rl/reward-resemble/rubrics-as-rewards|RaR：把实例级 Rubric 直接变成强化学习奖励]]
 - [[rl/reward-resemble/ares|ARES：从预训练文档自动合成 Rubric 强化学习数据]]

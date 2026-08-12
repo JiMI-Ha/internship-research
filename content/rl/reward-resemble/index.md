@@ -2,7 +2,7 @@
 title: "Reward Resemble：奖励设计与多目标对齐"
 created: 2026-08-11
 published: 2026-08-11
-modified: 2026-08-11
+modified: 2026-08-12
 type: topic
 tags:
   - RL
@@ -37,6 +37,10 @@ tags:
 专项分只回答“方法是否直接涉及这四类问题”，不评价实验质量，也不会读取或改变业务契合度与 Paper solid 度。榜单保留 0 分论文作为背景材料，避免筛选口径不透明。
 
 ## 研究地图
+
+### RL Experience Replay 与 Off-Policy 稳定性
+
+- [[rl/reward-resemble/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]] — 比较 27 项完整轨迹、prefix/state、外部专家、搜索/value replay 与稳定性工作，给出证据边界和阅读顺序。
 
 ### Rubric Reward 与组合
 
@@ -108,5 +112,6 @@ tags:
 2. **Reward Model**：偏差、校准、鲁棒性、reward hacking 与去偏方法。
 3. **Multi-objective alignment**：多奖励标准化、聚合、策略组合与 Pareto 优化。
 4. **Constrained alignment**：安全 cost、拉格朗日方法、风险敏感或尾部约束。
+5. **Experience replay**：成功轨迹、困难样本、prefix/state replay，以及 off-policy 数据的新鲜度与稳定性。
 
 安全 benchmark 归入 [[llm-safety/|LLM Safety]]；只有在能直接解释奖励设计时才与本系列交叉链接。

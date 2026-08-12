@@ -16,6 +16,18 @@ modified: 2026-08-12
 
 ## 最新调研
 
+### [[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]]
+
+`OPD` · `MOPD` · `专题调研近 40 项工作`
+
+MOPD 让学生在自己的 rollout 上接受领域教师的 token 级监督，以一次训练把数学、代码、指令遵循、工具调用等专家能力整合到统一模型；真正的边界是教师距离、prompt 路由和决策 token support。
+
+- **Motivation**：Mixed-RL 会耦合不同 reward 与训练预算，离线模仿有 exposure bias，参数平均又容易发生专家干涉。
+- **Method**：从统一学生分叉训练同源专家，再把学生 rollout 路由给对应教师，用 reverse-KL、log-ratio policy gradient 或 support-aware logits 更新学生。
+- **Results**：Qwen3-30B-A3B 上归一化分数 0.9373，Mix-RL 为 0.8818；但异源教师把初始 KL 从约 0.04 拉到 0.19 后，Top-k 训练约第 18 步崩溃。
+
+[[opd/mopd/mopd-capability-integration|阅读全文 →]] · [[opd/mopd/|查看 MOPD 研究地图 →]]
+
 ### [[rl/experience-replay/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]]
 
 `RL` · `Experience Replay` · `专题调研 27 项工作`
@@ -151,6 +163,7 @@ RLHF 中“更有用”和“更安全”发生冲突时，Safe RLHF 分别学�
 ## 内容地图
 
 - **[[papers/|论文调研]]**：按 Motivation、Method、Results、Limitations 结构整理。
+- **[[opd/|OPD]] → [[opd/mopd/|MOPD：多教师能力整合]]**：On-Policy Distillation、多教师能力合版、稳定性与工程实现。
 - **[[rl/|RL]] → [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]]**：奖励设计、Reward Model、多目标聚合与约束优化。
 - **[[llm-safety/|LLM Safety]] → [[llm-safety/over-refusal/|Over-Refusal 系列]]**：安全拒答、过度拒答与边界评测。
 - **方法笔记**：沉淀可跨论文复用的算法与实验设计知识。

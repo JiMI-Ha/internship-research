@@ -9,6 +9,7 @@ modified: 2026-08-12
 
 ## 论文列表
 
+- **OPD / MOPD**：[[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]] — 多教师蒸馏、能力整合、Top-k support、工业部署
 - **RL / Experience Replay**：[[rl/experience-replay/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]] — 成功轨迹复用、buffer 管理、off-policy 稳定性
 - **RL / Reward Resemble**：[[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]] — 多奖励归一化、GRPO
 - **RL / Reward Resemble**：[[rl/reward-resemble/rubrics-as-rewards|RaR：把实例级 Rubric 直接变成强化学习奖励]] — rubric reward、开放域 RL

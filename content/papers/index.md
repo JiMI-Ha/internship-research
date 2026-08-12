@@ -10,7 +10,35 @@ modified: 2026-08-12
 ## 论文列表
 
 - **OPD / MOPD**：[[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]] — 多教师蒸馏、能力整合、Top-k support、工业部署
-- **RL / Experience Replay**：[[rl/experience-replay/rlep-experience-replay|RLEP 与 LLM Experience Replay：从成功轨迹复用到稳定 Off-Policy RL]] — 成功轨迹复用、buffer 管理、off-policy 稳定性
+- **RL / Experience Replay 专题**：[[rl/experience-replay/|28 篇逐篇 Motivation / Method / Results]] — [[rl/experience-replay/rlep-experience-replay|研究地图]]
+- **RL / Experience Replay**：[[rl/experience-replay/rlep|RLEP]] — 两阶段成功轨迹回放
+- **RL / Experience Replay**：[[rl/experience-replay/exgrpo|ExGRPO]] — 经验价值与 mixed-policy objective
+- **RL / Experience Replay**：[[rl/experience-replay/bapo-buffer-matters|Buffer Matters / BAPO]] — 难题 revisit 与 freshness
+- **RL / Experience Replay**：[[rl/experience-replay/replay-enhanced-repo|Replay-Enhanced RePO]] — 单次训练内异步回放
+- **RL / Experience Replay**：[[rl/experience-replay/dots-rollout-replay|DOTS + Rollout Replay]] — 难度定向采样
+- **RL / Experience Replay**：[[rl/experience-replay/eframe|EFRAME]] — hard-prompt Exploration–Filter–Replay
+- **RL / Experience Replay**：[[rl/experience-replay/retrospective-replay|Retrospective Replay / RRL]] — 中间状态续写
+- **RL / Experience Replay**：[[rl/experience-replay/remix|ReMix]] — 阶段化历史混合
+- **RL / Experience Replay**：[[rl/experience-replay/trajectory-balance-asynchrony|Trajectory Balance with Asynchrony]] — 异步探索—学习解耦
+- **RL / Experience Replay**：[[rl/experience-replay/efficient-rl-experience-replay|Efficient RL Training with Experience Replay]] — 性能—计算 Pareto
+- **RL / Experience Replay**：[[rl/experience-replay/reval|ReVal]] — value-based off-policy RL
+- **RL / Experience Replay**：[[rl/experience-replay/deepsearch|DeepSearch]] — MCTS 与 verified-solution cache
+- **RL / Experience Replay**：[[rl/experience-replay/poer|POER]] — 失败轨迹 prefix replay
+- **RL / Experience Replay**：[[rl/experience-replay/polaris-rollout-rescue|Polaris Rollout-Rescue]] — 全失败组按需救援
+- **RL / Experience Replay**：[[rl/experience-replay/arpo|ARPO]] — GUI agent 经验回放
+- **RL / Experience Replay**：[[rl/experience-replay/kimi-k1-5|Kimi k1.5]] — 大型系统轨迹缓存
+- **RL / Experience Replay**：[[rl/experience-replay/luffy|LUFFY]] — off-policy 专家指导
+- **RL / Experience Replay**：[[rl/experience-replay/rephrasing-repo|Rephrasing RePO]] — 专家答案改写
+- **RL / Experience Replay**：[[rl/experience-replay/relift|ReLIFT]] — 在线 RL 与困难样本 SFT 交错
+- **RL / Experience Replay**：[[rl/experience-replay/chord|CHORD]] — 动态协调 SFT 与 RL
+- **RL / Experience Replay**：[[rl/experience-replay/kdrl|KDRL]] — 知识蒸馏与 RL 统一
+- **RL / Experience Replay**：[[rl/experience-replay/poets|POETS]] — policy ensemble 与 replay
+- **RL / Experience Replay**：[[rl/experience-replay/inspo|INSPO]] — 失败经验驱动 instruction 进化
+- **RL / Experience Replay**：[[rl/experience-replay/soft-policy-optimization|Soft Policy Optimization]] — 序列模型 off-policy 目标
+- **RL / Experience Replay**：[[rl/experience-replay/tapered-off-policy-reinforce|Tapered Off-Policy REINFORCE]] — 平滑控制陈旧样本权重
+- **RL / Experience Replay**：[[rl/experience-replay/asymmetric-reinforce|Asymmetric REINFORCE]] — 正负奖励非对称更新
+- **RL / Experience Replay**：[[rl/experience-replay/m2po|M2PO]] — second-moment trust constraint
+- **RL / Experience Replay**：[[rl/experience-replay/revisiting-grpo-off-policy|Revisiting GRPO]] — on/off-policy 边界分析
 - **RL / Reward Resemble**：[[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]] — 多奖励归一化、GRPO
 - **RL / Reward Resemble**：[[rl/reward-resemble/rubrics-as-rewards|RaR：把实例级 Rubric 直接变成强化学习奖励]] — rubric reward、开放域 RL
 - **RL / Reward Resemble**：[[rl/reward-resemble/ares|ARES：从预训练文档自动合成 Rubric 强化学习数据]] — rubric synthesis、数据扩展

@@ -98,19 +98,18 @@ function validatePaper(filePath, content, data) {
 }
 
 async function main() {
-  const files = await collectMarkdown(CONTENT_DIR)
+  const files = (await collectMarkdown(CONTENT_DIR)).filter(
+    (filePath) => !filePath.startsWith(TEMPLATE_DIR + path.sep),
+  )
   const seenTitles = new Map()
 
   for (const filePath of files) {
-    if (filePath.startsWith(TEMPLATE_DIR + path.sep)) continue
-
     const source = await readFile(filePath, "utf8")
     const { data, content } = matter(source)
 
-    const requiredFields =
-      data.type === "paper" || data.type === "topic"
-        ? REQUIRED_FRONTMATTER
-        : ["title", "created", "published", "modified"]
+    const requiredFields = filePath.endsWith(`${path.sep}index.md`)
+      ? ["title", "created", "published", "modified"]
+      : REQUIRED_FRONTMATTER
     for (const field of requiredFields) {
       if (data[field] === undefined || data[field] === "") {
         fail(filePath, `missing required frontmatter field: ${field}`)

@@ -1,29 +1,29 @@
-name: Paper or topic request
-description: Suggest a paper, a paper set, or a new research topic
-title: "[Research] "
+name: 论文或专题请求
+description: 推荐论文、论文集合，或创建新的研究专题
+title: "[调研] "
 labels: [research]
 body:
   - type: textarea
     id: query
     attributes:
-      label: Business query or research question
-      description: What decision, system, or mechanism do you want this research to inform?
-      placeholder: How should multiple Reward signals be made comparable and aggregatable?
+      label: 业务 Query 或研究问题
+      description: 你希望这项调研帮助回答什么决策、系统设计或机制问题？
+      placeholder: 如何让多个 Reward 信号更可比较、更可聚合？
     validations:
       required: true
   - type: textarea
     id: sources
     attributes:
-      label: Paper links or sources
-      description: Provide DOI, arXiv, conference, code, or public PDF links. Leave blank to request discovery.
+      label: 论文链接或来源
+      description: 请提供 DOI、arXiv、会议页、代码或公开 PDF 链接；如果希望先调研发现论文，可留空。
   - type: textarea
     id: lenses
     attributes:
-      label: Candidate lenses
-      description: What mechanisms or constraints matter? These are suggestions, not fixed scoring rules.
-      placeholder: Scale handling, gradient conflict, engineering cost, safety constraints
+      label: 候选 Lens
+      description: 你在意哪些机制或约束？它们是候选筛选视角，不是固定的唯一评分规则。
+      placeholder: 量纲处理、梯度冲突、工程成本、安全约束
   - type: textarea
     id: context
     attributes:
-      label: Context and exclusions
-      description: State constraints, deployment setting, and what is out of scope.
+      label: 背景与排除项
+      description: 请说明业务约束、部署环境，以及明确不在本次调研范围内的内容。

@@ -1,6 +1,7 @@
 {
   "name": "internship-research",
   "description": "实习调研：论文、方法与实验结论的中文知识库",
+  "private": true,
   "version": "0.1.0",
   "type": "module",
   "license": "MIT",
@@ -9,7 +10,7 @@
     "build": "node ./quartz/bootstrap-cli.mjs build",
     "validate:content": "node scripts/validate-content.mjs",
     "check": "tsc --noEmit && npx prettier . --check",
-    "check:workspace": "npm run validate:content && tsc --noEmit && npx prettier --check README.md CONTRIBUTING.md docs/*.md content/templates/*.md scripts/*.mjs .github/workflows/content-check.yml package.json",
+    "check:workspace": "npm run validate:content && tsc --noEmit && npx prettier --check README.md CONTRIBUTING.md CODE_OF_CONDUCT.md SECURITY.md docs/*.md content/templates/*.md scripts/*.mjs .github/pull_request_template.md .github/ISSUE_TEMPLATE/*.yml .github/workflows/content-check.yml package.json",
     "format": "npx prettier . --write",
     "test": "tsx --test"
   },

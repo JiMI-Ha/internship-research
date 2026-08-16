@@ -22,7 +22,8 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) =>
         page.fileData.frontmatter?.type === "paper" &&
         ((page.fileData.frontmatter?.tags ?? []).includes("reward-resemble") ||
-          page.fileData.slug?.startsWith("rl/experience-replay/") === true),
+          page.fileData.slug?.startsWith("rl/experience-replay/") === true ||
+          page.fileData.slug?.startsWith("gaming/") === true),
     }),
     Component.ReaderMode(),
   ],
@@ -71,6 +72,30 @@ export const defaultListPageLayout: PageLayout = {
         boardTitle: "Experience Replay 论文评分榜",
       }),
       condition: (page) => page.fileData.slug === "rl/experience-replay/index",
+    }),
+    Component.ConditionalRender({
+      component: Component.PaperRecommendation({ topic: "gaming-story" }),
+      condition: (page) => page.fileData.slug === "gaming/剧情/index",
+    }),
+    Component.ConditionalRender({
+      component: Component.PaperRating({
+        variant: "board",
+        topicSlug: "gaming/剧情",
+        boardTitle: "AI 剧情与剧本杀论文评分榜",
+      }),
+      condition: (page) => page.fileData.slug === "gaming/剧情/index",
+    }),
+    Component.ConditionalRender({
+      component: Component.PaperRecommendation({ topic: "gaming-language" }),
+      condition: (page) => page.fileData.slug === "gaming/创造语言/index",
+    }),
+    Component.ConditionalRender({
+      component: Component.PaperRating({
+        variant: "board",
+        topicSlug: "gaming/创造语言",
+        boardTitle: "创造语言与群体仪式论文评分榜",
+      }),
+      condition: (page) => page.fileData.slug === "gaming/创造语言/index",
     }),
     Component.ReaderMode(),
   ],

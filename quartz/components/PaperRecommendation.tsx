@@ -50,6 +50,61 @@ export const experienceReplayCriteria = [
   },
 ] as const
 
+export const gamingStoryCriteria = [
+  {
+    key: "dynamicNarrative",
+    shortLabel: "动态叙事",
+    label: "动态叙事 / Drama Management",
+    description: "显式处理玩家行为导致的剧情分支、节奏控制、叙事目标或事件调度。",
+  },
+  {
+    key: "privateAgents",
+    shortLabel: "角色 / 私密状态",
+    label: "角色 Agent 与私密状态",
+    description: "角色拥有独立目标、记忆、计划、视角、受限信息或可控角色交互。",
+  },
+  {
+    key: "consistencySolvability",
+    shortLabel: "一致性 / 可解性",
+    label: "一致性与可解性",
+    description: "显式处理世界状态、因果、线索依赖、规划约束、角色意图或可验证性。",
+  },
+  {
+    key: "orchestrationEvaluation",
+    shortLabel: "编排 / 评测",
+    label: "工程编排与评测",
+    description: "提供可复用系统框架、数据 / benchmark、评测方法或工程化工作流。",
+  },
+] as const
+
+export const gamingLanguageCriteria = [
+  {
+    key: "sharedSymbols",
+    shortLabel: "共享符号",
+    label: "共享符号 / 惯例形成",
+    description: "直接解释陌生互动者如何共同创造、简化、学习或传递符号系统。",
+  },
+  {
+    key: "memeIdentity",
+    shortLabel: "梗 / 圈层",
+    label: "梗、概念与圈层边界",
+    description: "直接讨论模板复用、变体、迷因素养、身份建构、文化资本或 insider / outsider 边界。",
+  },
+  {
+    key: "ritualCooperation",
+    shortLabel: "仪式 / 合作",
+    label: "仪式、同步与合作",
+    description: "直接检验或综合重复、共同目标、同步活动、社会联结、信任或合作。",
+  },
+  {
+    key: "gameDesignEvidence",
+    shortLabel: "游戏设计证据",
+    label: "可转化的游戏设计证据",
+    description:
+      "提供可复用的任务范式、可观测变量、设计框架或对照条件，可用于游戏原型和 A/B 测试。",
+  },
+] as const
+
 export type RecommendationCriterionKey = string
 export type RecommendationEvidence = Partial<Record<RecommendationCriterionKey, string>>
 
@@ -61,7 +116,7 @@ type RecommendationCriterion = {
 }
 
 type PaperRecommendationOptions = {
-  topic?: "reward-resemble" | "experience-replay"
+  topic?: "reward-resemble" | "experience-replay" | "gaming-story" | "gaming-language"
 }
 
 export type Recommendation = {
@@ -227,6 +282,110 @@ export const paperRecommendationEvidence: Record<string, RecommendationEvidence>
   },
 }
 
+export const gamingStoryEvidence: Record<string, RecommendationEvidence> = {
+  "generative-agents": {
+    privateAgents:
+      "每个 Agent 维护独立的记忆流、反思和分层计划，并由相关性、新近性、重要性检索驱动行动。",
+    orchestrationEvaluation:
+      "Smallville 沙盒和组件移除比较将角色记忆、反思与计划放入可观察的社会模拟。",
+  },
+  dramatron: {
+    orchestrationEvaluation:
+      "用 premise、角色、故事节拍、场景和对白的分层生成工作流支持人类作者逐层编辑。",
+  },
+  camel: {
+    privateAgents:
+      "用 inception prompting 向 user / assistant Agent 分配不同角色、目标和对话协议。",
+    orchestrationEvaluation:
+      "给出角色化多 Agent 协作和合成 instruction-following 数据的可复用框架。",
+  },
+  agentverse: {
+    privateAgents: "将单 Agent 的 profile、memory、planning 与 Agent group、environment 分层建模。",
+    orchestrationEvaluation: "提供群体协作、角色分工、动态环境和涌现行为实验的框架。",
+  },
+  autogen: {
+    orchestrationEvaluation:
+      "以 conversable agents、群聊、嵌套对话、工具执行和人类介入编排多 Agent 工作流。",
+  },
+  sotopia: {
+    privateAgents: "为互动双方配置不同身份、关系、私有目标和社会情境，再让其自由对话。",
+    orchestrationEvaluation: "提供多维社会交互评测、LLM judge 与人类评估的 benchmark 设置。",
+  },
+  "drama-management-survey": {
+    dynamicNarrative: "系统比较基于规划、搜索、MDP / RL 和规则的剧情干预与节奏控制方法。",
+    consistencySolvability:
+      "以叙事目标、世界状态和玩家模型约束事件选择，避免纯自由模拟失去故事结构。",
+  },
+  "interactive-narrative-intelligent-systems": {
+    dynamicNarrative:
+      "将 Drama Management 作为根据玩家行动选择、延后、替换或引入事件的独立控制层。",
+    consistencySolvability: "明确区分故事世界模型、叙事规划、角色 / 玩家建模与叙述呈现。",
+    orchestrationEvaluation: "作为领域综述，给出互动叙事智能系统的组件划分和方法分类。",
+  },
+  "narrative-planning-survey": {
+    dynamicNarrative: "讨论玩家行动造成状态偏离后的 replan、plan repair 与调度干预。",
+    consistencySolvability: "以动作前置条件、因果链接和角色意图生成可解释的故事事件。",
+  },
+  "plans-and-planning-narrative-generation": {
+    dynamicNarrative: "区分 interactive planning，并讨论玩家介入后维持叙事目标的规划问题。",
+    consistencySolvability:
+      "区分 story planning、discourse planning 和角色计划，保持事件因果与信息披露边界。",
+  },
+  "facade-interactive-drama": {
+    dynamicNarrative:
+      "Drama Manager 按当前状态与 tension 选择可执行的 beat，实现宏观结构与局部自由互动。",
+    consistencySolvability:
+      "每个 beat 定义前置条件、局部目标、角色行为和结束条件，限制非法剧情推进。",
+    orchestrationEvaluation:
+      "以可复用 beat 内容单元、Reactive behaviors 和自然语言行为映射构成完整互动戏剧架构。",
+  },
+}
+
+export const gamingLanguageEvidence: Record<string, RecommendationEvidence> = {
+  "galantucci-emergence-communication": {
+    sharedSymbols: "受限沟通实验直接观察陌生参与者如何逐步协商出共享图形符号。",
+    gameDesignEvidence: "提供可复用的受限通信任务和符号收敛观察指标。",
+  },
+  "garrod-foundations-representation": {
+    sharedSymbols: "反复互动使具象图像逐渐简化为搭档专属、可快速识别的抽象符号。",
+    gameDesignEvidence: "以沟通效率、符号复杂度和搭档间理解作为可观察变量。",
+  },
+  "kirby-cumulative-cultural-evolution": {
+    sharedSymbols: "通过迭代学习说明随机信号可在文化传递中变得更可学习且具有组合结构。",
+    gameDesignEvidence: "提供传递链实验范式，可用于测试玩家生成规则的稳定性与可学习性。",
+  },
+  "wiggins-bowers-memes-genre": {
+    memeIdentity: "把互联网迷因定义为参与式数字文化中的体裁，强调模板、变体与社群实践。",
+    gameDesignEvidence: "提供分析迷因复用、改写和参与规则的框架。",
+  },
+  "gal-shifman-kampf-it-gets-better": {
+    memeIdentity: "检验迷因模板如何让参与者围绕共享文本建构集体身份。",
+    gameDesignEvidence: "提供比较不同模板、变体和身份叙事的内容分析路径。",
+  },
+  "nissenbaum-shifman-contested-cultural-capital": {
+    memeIdentity: "将迷因素养和使用资格解释为可争夺的文化资本与圈层边界。",
+  },
+  "miltner-lolcats-identity": {
+    memeIdentity: "说明同一迷因可同时承担身份表达、归属和边界维护功能。",
+  },
+  "watson-jones-legare-social-functions-rituals": {
+    ritualCooperation: "综合群体仪式如何服务社会联结、规范、身份和群体协调。",
+    gameDesignEvidence: "为将重复活动设计为身份与共同目标反馈提供理论框架。",
+  },
+  "hobson-psychology-rituals": {
+    ritualCooperation: "提出仪式的心理过程框架，连接重复、因果不透明、情绪和社会功能。",
+    gameDesignEvidence: "提供可拆分测试的仪式设计变量与机制地图。",
+  },
+  "wiltermuth-heath-synchrony-cooperation": {
+    ritualCooperation: "实验检验同步活动与后续合作行为之间的关系。",
+    gameDesignEvidence: "提供同步条件与合作选择作为可复用对照和结果变量。",
+  },
+  "reddish-fischer-bulbulia-lets-dance": {
+    ritualCooperation: "实验区分同步与共同目标，显示两者结合更能促进合作。",
+    gameDesignEvidence: "提供同步 × 共同意图的因子设计和合作结果指标。",
+  },
+}
+
 export const experienceReplayEvidence: Record<string, RecommendationEvidence> = {
   rlep: {
     replayBuffer: "先用一轮 RL 的成功轨迹建库，再从同一基座重训并混入历史正确答案。",
@@ -357,14 +516,32 @@ export function compareRecommendations(left: Recommendation, right: Recommendati
 export default ((options: PaperRecommendationOptions = {}) => {
   const topic = options.topic ?? "reward-resemble"
   const isExperienceReplay = topic === "experience-replay"
+  const isGamingStory = topic === "gaming-story"
+  const isGamingLanguage = topic === "gaming-language"
   const criteria: readonly RecommendationCriterion[] = isExperienceReplay
     ? experienceReplayCriteria
-    : recommendationCriteria
+    : isGamingStory
+      ? gamingStoryCriteria
+      : isGamingLanguage
+        ? gamingLanguageCriteria
+        : recommendationCriteria
   const evidenceByPaper = isExperienceReplay
     ? experienceReplayEvidence
-    : paperRecommendationEvidence
-  const topicSlug = `rl/${topic}/`
-  const boardTitle = isExperienceReplay ? "三项机制覆盖榜" : "四项专项推荐榜"
+    : isGamingStory
+      ? gamingStoryEvidence
+      : isGamingLanguage
+        ? gamingLanguageEvidence
+        : paperRecommendationEvidence
+  const topicSlug = isGamingStory
+    ? "gaming/剧情/"
+    : isGamingLanguage
+      ? "gaming/创造语言/"
+      : `rl/${topic}/`
+  const boardTitle = isExperienceReplay
+    ? "三项机制覆盖榜"
+    : isGamingStory || isGamingLanguage
+      ? "四项专项推荐榜"
+      : "四项专项推荐榜"
   const maxScore = criteria.length
 
   const PaperRecommendation: QuartzComponent = ({

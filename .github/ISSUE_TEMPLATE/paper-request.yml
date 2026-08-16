@@ -1,0 +1,29 @@
+name: Paper or topic request
+description: Suggest a paper, a paper set, or a new research topic
+title: "[Research] "
+labels: [research]
+body:
+  - type: textarea
+    id: query
+    attributes:
+      label: Business query or research question
+      description: What decision, system, or mechanism do you want this research to inform?
+      placeholder: How should multiple Reward signals be made comparable and aggregatable?
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Paper links or sources
+      description: Provide DOI, arXiv, conference, code, or public PDF links. Leave blank to request discovery.
+  - type: textarea
+    id: lenses
+    attributes:
+      label: Candidate lenses
+      description: What mechanisms or constraints matter? These are suggestions, not fixed scoring rules.
+      placeholder: Scale handling, gradient conflict, engineering cost, safety constraints
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and exclusions
+      description: State constraints, deployment setting, and what is out of scope.

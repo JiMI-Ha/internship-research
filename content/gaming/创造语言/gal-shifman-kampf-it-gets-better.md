@@ -17,7 +17,7 @@ source_url: https://doi.org/10.1177/1461444814568784
 
 - **论文**：[It Gets Better: Internet Memes and the Construction of Collective Identity](https://doi.org/10.1177/1461444814568784)
 - **作者**：Neta Gal、Limor Shifman、Zohar Kampf
-- **期刊**：_New Media & Society_, 17(11), 1698–1714（2015）
+- **期刊**：_New Media & Society_, 18(8), 1698–1714（2016）
 - **研究对象**：_It Gets Better Project_ 关联的 202 条 YouTube 视频
 - **专项推荐分**：**2 / 4**（梗、概念与圈层边界；可转化的游戏设计证据）
 
@@ -66,10 +66,10 @@ source_url: https://doi.org/10.1177/1461444814568784
   title={It gets better: Internet memes and the construction of collective identity},
   author={Gal, Neta and Shifman, Limor and Kampf, Zohar},
   journal={New Media \& Society},
-  volume={17},
-  number={11},
+  volume={18},
+  number={8},
   pages={1698--1714},
-  year={2015},
-  doi={10.1177/1461444814561704}
+  year={2016},
+  doi={10.1177/1461444814568784}
 }
 ```

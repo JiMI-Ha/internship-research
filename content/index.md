@@ -16,6 +16,30 @@ modified: 2026-08-12
 
 ## 最新调研
 
+### [[gaming/剧情/|Gaming / 剧情：AI 实时分支叙事与剧本杀]]
+
+`Gaming` · `互动叙事` · `剧本杀` · `11 篇逐篇阅读`
+
+本专题把 LLM、多 Agent、角色记忆、互动叙事、Drama Management 与叙事规划放到同一套剧本杀系统边界中：角色可即兴，事实必须可验证；支线可扩展，谜题仍需可解。
+
+- **Motivation**：自由文本互动会带来分支爆炸、角色失忆、信息泄露和线索矛盾，单个 LLM 无法可靠兼任编剧、主持、裁判和事实库。
+- **Method**：逐篇拆解 Generative Agents、Dramatron、CAMEL、AutoGen、SOTOPIA、Façade 和叙事规划文献，并保留业务契合度、Paper solid 度和四项专项推荐评分。
+- **Results**：每篇均独立给出 Motivation、Method、Experimental Setup、Results、Ablation、Limitations 与 Takeaways；专题提出“结构化事实层 + Drama Manager + 角色权限记忆 + LLM 表达层”的混合架构。
+
+[[gaming/剧情/|查看 11 篇逐篇阅读与评分 →]]
+
+### [[gaming/创造语言/|Gaming / 创造语言：从造梗到共享符号与群体仪式]]
+
+`Gaming` · `语言涌现` · `迷因` · `群体仪式` · `11 篇逐篇解读`
+
+“共同发明语言、概念或仪式”不只是造梗：互动会把受限的信号变成共享惯例，迷因模板会组织身份与边界，而同步行动只有和共同目标结合，才更稳定地促进合作。
+
+- **Motivation**：为多人游戏、UGC 社区与 AI Agent 社会解释玩家如何共同造出可复用的表达、概念和仪式。
+- **Method**：收录受控符号学实验、迭代学习实验、迷因个案 / 受众研究，以及仪式与同步合作实验和综述。
+- **Results**：Reddish et al. 在共同目标 + 同步条件下观察到 93% 的合作选择；Garrod et al. 显示反复互动可把具象图像压缩为搭档专属的抽象符号。
+
+[[gaming/创造语言/|查看 11 篇逐篇解读 →]]
+
 ### [[rl/reward-resemble/saw|SAW：按奖励信息量动态调权，缓解多目标异步饱和]]
 
 `RL` · `Reward Resemble 系列` · `动态奖励权重`

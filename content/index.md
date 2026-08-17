@@ -16,6 +16,18 @@ modified: 2026-08-12
 
 ## 最新调研
 
+### [[opd/data-selection/|OPD 数据筛选：Prompt、Rollout、Prefix 与 Token 监督]]
+
+`OPD` · `数据筛选` · `9 篇逐篇阅读` · `0–4 机制榜`
+
+标准 OPD 不必把每个 prompt、student rollout、长轨迹后缀和 token 都等量训练。本专题按固定机制整理：prompt curriculum、rollout / trajectory 筛选或重加权、prefix drift 可靠性控制、token 级选择或重加权；专项分只记录方法覆盖范围，不混入效果或论文质量。
+
+- **Motivation**：全量、均匀的教师监督会混入当前不可学习的题目、不可靠的长轨迹后缀和低信息 token，同时消耗 rollout 与教师计算预算。
+- **Method**：收录 FiRe-OPD、SEAD、PG-OPD、Prune-OPD、ReNIO、BRTS、TIP、DEAR、TA-OPD；按 A–D 四项数据筛选机制给 0–4 分。
+- **Results**：FiRe-OPD 同时覆盖 trajectory 过滤与 token 重加权；SEAD 同时覆盖 prompt curriculum 与 token zoning；其余方法各自定位 rollout candidate、prefix drift、sample importance 或 token teachability。
+
+[[opd/data-selection/|查看数据筛选机制榜与 9 篇逐篇解读 →]]
+
 ### [[gaming/剧情/|Gaming / 剧情：AI 实时分支叙事与剧本杀]]
 
 `Gaming` · `互动叙事` · `剧本杀` · `11 篇逐篇阅读`

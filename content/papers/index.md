@@ -13,6 +13,7 @@ modified: 2026-08-12
 
 - **Gaming / 创造语言**：[[gaming/创造语言/|从造梗到共享符号与群体仪式：11 篇逐篇 Motivation / Method / Results]] — 共享符号、迷因与圈层身份、同步仪式、多人协作
 
+- **OPD / 数据筛选专题**：[[opd/data-selection/|Prompt、Rollout、Prefix 与 Token 监督]] — 按 0–4 固定机制分整理 OPD 中的 prompt curriculum、trajectory 选择、prefix drift 控制与 token 选择。
 - **OPD / MOPD**：[[opd/mopd/mopd-capability-integration|MOPD 合版：多教师 On-Policy Distillation 的能力整合、失败模式与工程选型]] — 多教师蒸馏、能力整合、Top-k support、工业部署
 - **OPD / MOPD 逐篇站内解读**：39 篇论文均有独立 Motivation、Method、Experimental Setup、Results 与局限页面。
   - A. 直接方法、改进与诊断：[[opd/mopd/mimo-v2-flash|MiMo-V2-Flash Technical Report]]、[[opd/mopd/nemotron-cascade-2|Nemotron-Cascade 2]]、[[opd/mopd/copd|Co-Evolving Policy Distillation（CoPD）]]、[[opd/mopd/camopd|Counteraction-Aware MOPD（CaMOPD）]]、[[opd/mopd/mopd|MOPD: Multi-Teacher On-Policy Distillation]]、[[opd/mopd/deepseek-v4|DeepSeek-V4]]、[[opd/mopd/h-opd|H-OPD: Heterogeneous Multi-Teacher Multimodal OPD]]、[[opd/mopd/ui-mopd|UI-MOPD]]、[[opd/mopd/top-k-misses-decision|When Top-K Misses the Decision]]、[[opd/mopd/promptsd|PROMPTSD]]、[[opd/mopd/regen|REGEN]]、[[opd/mopd/physics-multi-turn-planning|The Physics of Multi-Turn Long-Horizon Planning]]、[[opd/mopd/smopd|SMOPD]]、[[opd/mopd/ls-mopd|LS-MOPD]]

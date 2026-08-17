@@ -11,6 +11,7 @@ On-Policy Distillation 相关调研，关注学生在自身 rollout 上接受教
 
 ## 系列
 
+- [[opd/data-selection/|OPD 数据筛选：Prompt、Rollout、Prefix 与 Token 监督]] — 按固定机制榜整理哪些 prompt、trajectory、prefix 和 token 值得进入 OPD 训练。
 - [[opd/mopd/|MOPD：多教师能力整合]] — 用多个领域或阶段教师把专项能力合并进统一学生模型。
 
 ## 关键问题

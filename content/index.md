@@ -14,9 +14,6 @@ modified: 2026-08-17
 > [!abstract] 阅读原则
 > 不只记录论文“说了什么”，还要区分问题证据、方法机制、实验结果与适用边界。
 
-> [!tip] GitHub 网页 Topic 筛选器
-> 在 [GitHub 新建筛选请求](https://github.com/JiMI-Ha/internship-research/issues/new?template=topic-filter.yml) 中输入 Topic。筛选器会搜索论文、总结候选、按 Topic 推荐判断指标，并在 Issue 回复可解释 Rank；选择发布时会创建等待人工审阅的 PR。
-
 ## 最新调研
 
 ### [[opd/data-selection/|OPD 数据筛选：Prompt、Rollout、Prefix 与 Token 监督]]

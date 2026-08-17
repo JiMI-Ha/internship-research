@@ -66,17 +66,6 @@ npm run build
 
 完整模型见：[研究工作台模型](docs/research-workspace-model.md) 与 [工作流](docs/workflow.md)。
 
-## GitHub 网页 Topic 筛选器
-
-在 GitHub 的 [新建 Topic 论文筛选请求](https://github.com/JiMI-Ha/internship-research/issues/new?template=topic-filter.yml) 页面输入研究 Topic、可选业务目标和约束后，筛选器会：
-
-1. 搜索并区分直接相关与相邻论文；
-2. 总结每篇候选的 problem、method、主结果与局限；
-3. 根据 Topic 推荐 3–5 个适合判断的指标；
-4. 在 Issue 中生成带证据和未知项的可解释 Rank。
-
-默认只在 Issue 回复结果。选择“发布到网站并创建 PR”时，Agent 才会生成 Topic 页面和已核验论文的 Reading Card，并提交一个等待人工审阅的 Pull Request。运行前，仓库管理员需要在 GitHub Actions secrets 中配置 `ANTHROPIC_API_KEY`。
-
 ## 新建内容
 
 - 论文页模板：[`content/templates/paper.md`](content/templates/paper.md)

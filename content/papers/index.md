@@ -9,6 +9,10 @@ modified: 2026-08-17
 
 ## 论文列表
 
+## Agentic Evaluation
+
+- **Agentic Evaluation**：[[agentic-eval/harness-sensitivity|Agentic Benchmark Harness 敏感性：为什么榜单分数不是裸模型能力]] — 汇总 SWE-agent、Agentless、Terminal-Bench、WebArena、OSWorld、τ-bench 与 Kimi K3 等证据，并给出业务指标推荐。
+
 ## Gaming / 创造语言
 
 - **Gaming / 创造语言**：[[gaming/创造语言/|从造梗到共享符号与群体仪式：11 篇逐篇 Motivation / Method / Results]] — 共享符号、迷因与圈层身份、同步仪式、多人协作

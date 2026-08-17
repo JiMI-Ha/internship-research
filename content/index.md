@@ -16,6 +16,18 @@ modified: 2026-08-17
 
 ## 最新调研
 
+### [[agentic-eval/harness-sensitivity|Agentic Benchmark Harness 敏感性：为什么榜单分数不是裸模型能力]]
+
+`Agentic Eval` · `Harness 敏感性` · `业务指标` · `系统级评测`
+
+Agentic benchmark 测到的通常不是裸模型，而是模型、agent scaffold、tool interface、context management、inference stack、sandbox 与 evaluator 组成的完整系统。公开榜单适合做先验，业务选型仍要回到同一内部 harness 下的端到端闭环。
+
+- **Motivation**：避免把厂商原生 agent 或公开榜单分数误读成模型裸能力，尤其在 coding、terminal、web、GUI 与 tool-use 长轨迹任务中。
+- **Method**：汇总 SWE-agent、Agentless、Terminal-Bench、WebArena、OSWorld、τ-bench、Kimi K3 与 Kimi Vendor Verifier 等证据，拆解 scaffold、tool schema、上下文、部署和 evaluator 的影响。
+- **Results**：推荐业务侧重点看 BVRR、Pass^k、CPVS、HIR、PADR、HTR、PSI 等指标，而不是只追公开 benchmark resolved rate。
+
+[[agentic-eval/harness-sensitivity|阅读全文与业务指标推荐 →]] · [[agentic-eval/|查看 Agentic Evaluation 专题 →]]
+
 ### [[opd/data-selection/|OPD 数据筛选：Prompt、Rollout、Prefix 与 Token 监督]]
 
 `OPD` · `数据筛选` · `9 篇逐篇阅读` · `0–4 机制榜`
@@ -223,6 +235,7 @@ RLHF 中“更有用”和“更安全”发生冲突时，Safe RLHF 分别学�
 ## 内容地图
 
 - **[[papers/|论文调研]]**：按 Motivation、Method、Results、Limitations 结构整理。
+- **[[agentic-eval/|Agentic Evaluation]]**：拆解 agentic benchmark 中模型、harness、scaffold、工具协议和业务指标的关系。
 - **[[opd/|OPD]] → [[opd/mopd/|MOPD：多教师能力整合]]**：On-Policy Distillation、多教师能力合版、稳定性与工程实现。
 - **[[rl/|RL]] → [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]]**：奖励设计、Reward Model、多目标聚合与约束优化。
 - **[[llm-safety/|LLM Safety]] → [[llm-safety/over-refusal/|Over-Refusal 系列]]**：安全拒答、过度拒答与边界评测。

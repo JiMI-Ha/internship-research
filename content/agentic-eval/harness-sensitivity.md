@@ -347,6 +347,81 @@ Kimi Vendor Verifier 进一步指出，benchmark score anomaly 可能来自 deco
 | 迁移   | HTR、PSI                                        | 榜单能力能否迁到内部 harness。 |
 | 过程   | Tool Error Recovery、Context Loss、Looping Rate | 定位优化 scaffold 的方向。     |
 
+### 10. 推荐 Rank 指标：不要把所有分数简单平均
+
+> [!important] 排名口径
+> Agent 排名应先过硬门槛，再按业务价值排序，最后用成本、稳定性和风险做 tie-breaker。不要把公开 benchmark、内部成功率、成本和安全风险直接归一化平均成一个“总分”，否则高风险或高返工方案会被单项高成功率掩盖。
+
+#### Rank-0：硬门槛过滤
+
+进入排名前先过滤不可上线方案：
+
+- `Policy Violation Rate` 高于业务阈值：淘汰。
+- `Unauthorized / Destructive Action Attempt Rate` 高于阈值：淘汰。
+- `PADR` 或 `Rollback Rate` 高于阈值：淘汰。
+- `HTR` 明显低于阈值：说明公开榜单能力迁移失败，降级或淘汰。
+- `PSI` 过高：说明对 prompt / tool schema / context policy 过敏，除非能固定 harness，否则不进生产排名。
+
+#### Rank-1：主排名指标
+
+首推两个主排名口径，按业务阶段二选一：
+
+| 阶段          | 主 Rank 指标         | 公式口径                                                     | 适用场景                         |
+| ------------- | -------------------- | ------------------------------------------------------------ | -------------------------------- |
+| 试点 / 选型   | `BVRR@1`             | 一次运行即通过业务验收的比例                                 | 判断模型和 harness 是否够强。    |
+| 上线 / 规模化 | `Net Value per Task` | 成功收益 - 推理成本 - 人工成本 - 返工期望损失 - 风险期望损失 | 判断是否真的值得自动化。         |
+| 批处理离线    | `BVRR@k / CPVS`      | 多次采样后成功率除以单位成功成本                             | 可并行采样、允许 rerank 的场景。 |
+| 高可靠场景    | `Pass^k`             | 同任务 k 次全部成功的比例                                    | 客服、运维、金融、权限敏感任务。 |
+
+若只能选一个，推荐生产排序用：
+
+```text
+Net Value per Task
+= V_success * BVRR
+- C_inference
+- C_tool
+- C_human_review
+- C_rework * PADR
+- C_risk * PolicyViolationRate
+```
+
+这里的 `V_success`、`C_rework`、`C_risk` 应由业务方给定，不从论文或公开 benchmark 推断。
+
+#### Rank-2：同分 Tie-breaker
+
+主指标接近时，按以下顺序打破平局：
+
+1. **更低 HIR**：少依赖人工提示和接管。
+2. **更低 CPVS**：每个真实成功更便宜。
+3. **更高 Pass^3**：成功更稳定，不是偶然命中。
+4. **更低 PADR / Reopen Rate**：后续质量债更少。
+5. **更低 PSI**：换 prompt、tool schema、上下文策略后更稳。
+6. **更高 Tool Error Recovery Rate**：工具失败后能自恢复。
+7. **更短 Wall-clock per Success**：交付更快。
+
+#### Rank-3：诊断分，不直接用于总排名
+
+这些指标适合定位优化方向，但不建议直接进入总排名：
+
+- `Localization Accuracy`：适合诊断 coding agent 找文件 / 找函数能力。
+- `Tool Call Validity`：适合诊断 function calling 或 terminal agent。
+- `Context Loss Rate`：适合诊断长任务记忆与压缩策略。
+- `Looping / Stuck Rate`：适合诊断 scaffold 是否缺少停止条件。
+- `Checkpoint Progress Score`：适合长任务 partial credit，但不能替代最终业务验收。
+
+#### 推荐最终看板排序
+
+| 排名层   | 指标                      | 排序方式                   | 解释                   |
+| -------- | ------------------------- | -------------------------- | ---------------------- |
+| Gate     | Policy / PADR / HTR / PSI | 不达标直接淘汰             | 先保证可上线和可迁移。 |
+| Main     | Net Value per Task        | 越高越好                   | 最接近真实 ROI。       |
+| Main     | BVRR@1                    | 越高越好                   | 衡量一次闭环成功。     |
+| Cost     | CPVS                      | 越低越好                   | 避免高分但太贵。       |
+| Stable   | Pass^3                    | 越高越好                   | 避免偶然成功。         |
+| Human    | HIR                       | 越低越好                   | 衡量自动化程度。       |
+| Quality  | PADR / Reopen / Rollback  | 越低越好                   | 衡量后续质量债。       |
+| Transfer | HTR / PSI                 | HTR 越高越好，PSI 越低越好 | 衡量榜单能力能否迁移。 |
+
 ## Limitations
 
 1. 本文是主题调研，不是对所有 benchmark 的统一复现实验。
@@ -363,7 +438,8 @@ Kimi Vendor Verifier 进一步指出，benchmark score anomaly 可能来自 deco
 4. **Agentless 改变了 SWE-bench 的解释**：强结果可以来自 localization / repair / validation pipeline，而非完整 autonomous loop。
 5. **厂商 footnotes 很重要**：Kimi K3 明确区分 Kimi Code、Claude Code、Codex，并警告 thinking history 回传影响质量。
 6. **业务选型应看内部 harness 下的 BVRR、CPVS、HIR、PADR、HTR 和 PSI**，而不是直接追公开榜单第一。
-7. **如果怀疑某模型 harness overfit，先做 sensitivity analysis**：同模型多 harness、同 harness 多模型、tool schema perturbation、private temporal split 和 transfer test。
+7. **Rank 指标应先 gate、再排序、再诊断**：生产主排名优先用 Net Value per Task；试点阶段可用 BVRR@1；高可靠场景必须加入 Pass^k；不要把风险、成本和成功率简单平均。
+8. **如果怀疑某模型 harness overfit，先做 sensitivity analysis**：同模型多 harness、同 harness 多模型、tool schema perturbation、private temporal split 和 transfer test。
 
 ## Citation
 

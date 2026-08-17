@@ -1,0 +1,52 @@
+name: Topic paper filter
+
+on:
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  research:
+    if: >-
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'topic-filter')) ||
+      (github.event_name == 'issue_comment' &&
+        contains(github.event.issue.labels.*.name, 'topic-filter') &&
+        startsWith(github.event.comment.body, '/topic-filter'))
+    runs-on: ubuntu-latest
+    concurrency:
+      group: topic-paper-filter-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            You are handling GitHub Issue #${{ github.event.issue.number }} in ${{ github.repository }}.
+
+            Read the issue body and comments. Run the `topic-paper-filter` skill from
+            `.claude/skills/topic-paper-filter/SKILL.md`.
+
+            First, research the Topic: search direct primary-source papers, verify the relevant paper sections,
+            summarize candidates, recommend 3–5 Topic-specific metrics, and produce an explainable ranking.
+            Post the result as a GitHub Issue comment. Do not claim that raw benchmark scores from incompatible
+            settings are directly comparable. Preserve `unknown` for unreported evidence.
+
+            If the Issue field “完成后是否发布到网站？” says “发布到网站并创建 PR”, create a topic page and
+            only the Reading Cards you have actually verified. Update relevant indexes, run validation/build checks,
+            commit the changes to a new branch, and open a pull request. Do not push directly to main.
+
+            If publication is not requested, do not modify repository content. A later authorized user may comment:
+            `/topic-filter publish`.
+          claude_args: |
+            --max-turns 40
+            --allowedTools "Read,Write,Edit,Glob,Grep,Bash"

@@ -9,6 +9,10 @@ modified: 2026-08-17
 
 ## 论文列表
 
+## Agents / Harness Overfitting
+
+- **Agents / Harness Overfitting 专题**：[[agents/harness-overfitting/|Agent Harness 依赖与过拟合：论文与博客排序]] — 固定 scaffold、工具 schema、观测格式、动作空间、verifier 与预算导致的跨 harness 泛化风险；含 26 个来源排序与筛选指标。
+
 ## Gaming / 创造语言
 
 - **Gaming / 创造语言**：[[gaming/创造语言/|从造梗到共享符号与群体仪式：11 篇逐篇 Motivation / Method / Results]] — 共享符号、迷因与圈层身份、同步仪式、多人协作

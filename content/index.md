@@ -16,6 +16,18 @@ modified: 2026-08-17
 
 ## 最新调研
 
+### [[agents/harness-overfitting/|Agent Harness 依赖与过拟合：论文与博客排序]]
+
+`Agents` · `Harness Overfitting` · `26 个来源排序` · `跨 harness 泛化`
+
+本专题围绕 Kimi K3 提到的固定 harness 训练过拟合风险，整理 agent 场景下模型对 scaffold、工具 schema、观测格式、动作空间、verifier 与预算的依赖；DeepSeek V4 Pro 相关说法暂按传闻处理，不进入核心证据链。
+
+- **Motivation**：固定 agent harness 的训练收益可能来自适配 prompt / tool / verifier / controller，而不是可迁移任务能力。
+- **Method**：用 HS、GC、HLR、ER、RL 五项指标和扣分规则 rank 论文、博客与模型报告，并按 harness 层归类证据。
+- **Results**：Rethinking Harness Evolution、HarnessCompass、Kimi K3、SWE-agent、Mind2Web、AutoHarness、AI Agents That Matter 排在第一梯队。
+
+[[agents/harness-overfitting/|查看排序、筛选指标与实验设计 →]]
+
 ### [[opd/data-selection/|OPD 数据筛选：Prompt、Rollout、Prefix 与 Token 监督]]
 
 `OPD` · `数据筛选` · `9 篇逐篇阅读` · `0–4 机制榜`
@@ -223,6 +235,7 @@ RLHF 中“更有用”和“更安全”发生冲突时，Safe RLHF 分别学�
 ## 内容地图
 
 - **[[papers/|论文调研]]**：按 Motivation、Method、Results、Limitations 结构整理。
+- **[[agents/|Agents]] → [[agents/harness-overfitting/|Harness 依赖与过拟合]]**：Agent scaffold、工具协议、交互环境与跨 harness 泛化。
 - **[[opd/|OPD]] → [[opd/mopd/|MOPD：多教师能力整合]]**：On-Policy Distillation、多教师能力合版、稳定性与工程实现。
 - **[[rl/|RL]] → [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]]**：奖励设计、Reward Model、多目标聚合与约束优化。
 - **[[llm-safety/|LLM Safety]] → [[llm-safety/over-refusal/|Over-Refusal 系列]]**：安全拒答、过度拒答与边界评测。

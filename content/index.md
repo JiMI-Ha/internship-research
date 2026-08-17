@@ -2,7 +2,7 @@
 title: "实习调研"
 created: 2026-08-11
 published: 2026-08-11
-modified: 2026-08-12
+modified: 2026-08-17
 ---
 
 <div class="research-hero">
@@ -15,6 +15,18 @@ modified: 2026-08-12
 > 不只记录论文“说了什么”，还要区分问题证据、方法机制、实验结果与适用边界。
 
 ## 最新调研
+
+### [[rl/reward-resemble/ds-harness-overfitting|DeepSeek Harness Overfitting：RLVR 评测—训练闭环中的过拟合风险]]
+
+`RL` · `RLVR` · `Reward Hacking` · `Benchmark Contamination`
+
+公开证据不支持把 DeepSeek-R1 的能力提升简单归因为“harness 训练过拟合”；更稳妥的结论是：DeepSeek-R1 报告了 reward hacking 与去污染边界，后续论文在 HLE 单题上提出 benchmark-driven selection 证据。
+
+- **Motivation**：RLVR 让可执行测试、格式规则、verifier 和公开 benchmark 进入训练闭环，评测目标可能变成优化目标。
+- **Method**：逐条区分 DeepSeek-R1 技术报告、Benchmark-Driven Selection、HLE / LiveCodeBench 和 Reward Overoptimization 的证据强度。
+- **Results**：可以确认 reward 上升而 CodeForces Pass@1 下降的 reward hacking 例子；不能证明 DeepSeek 整体能力主要来自 benchmark/harness 过拟合。
+
+[[rl/reward-resemble/ds-harness-overfitting|阅读全文 →]] · [[rl/reward-resemble/|查看 Reward Resemble 研究地图 →]]
 
 ### [[opd/data-selection/|OPD 数据筛选：Prompt、Rollout、Prefix 与 Token 监督]]
 

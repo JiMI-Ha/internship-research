@@ -2,12 +2,14 @@
 title: "论文调研"
 created: 2026-08-11
 published: 2026-08-11
-modified: 2026-08-12
+modified: 2026-08-17
 ---
 
 这里收录论文的结构化阅读笔记，重点回答三个问题：研究动机是否真实、方法如何解决问题、结果是否足以支持主张。
 
 ## 论文列表
+
+- **RL / Reward Resemble**：[[rl/reward-resemble/ds-harness-overfitting|DeepSeek Harness Overfitting：RLVR 评测—训练闭环中的过拟合风险]] — reward hacking、benchmark-driven selection、public benchmark contamination
 
 ## Gaming / 创造语言
 

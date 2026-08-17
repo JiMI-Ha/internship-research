@@ -26,7 +26,6 @@ modified: 2026-08-17
 
 ### Reward Resemble 扩展阅读
 
-- [[rl/reward-resemble/ds-harness-overfitting|DeepSeek Harness Overfitting：RLVR 评测—训练闭环中的过拟合风险]]
 - [[rl/reward-resemble/saw|SAW：按奖励信息量动态调权，缓解多目标异步饱和]]
 - [[rl/reward-resemble/dynamic-reward-weighting|Dynamic Reward Weighting：在线重分配多目标对齐预算]]
 - [[rl/reward-resemble/gdpo|GDPO：逐奖励归一化避免多奖励优势坍缩]]

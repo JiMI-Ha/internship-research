@@ -9,8 +9,6 @@ modified: 2026-08-17
 
 ## 论文列表
 
-- **RL / Reward Resemble**：[[rl/reward-resemble/ds-harness-overfitting|DeepSeek Harness Overfitting：RLVR 评测—训练闭环中的过拟合风险]] — reward hacking、benchmark-driven selection、public benchmark contamination
-
 ## Gaming / 创造语言
 
 - **Gaming / 创造语言**：[[gaming/创造语言/|从造梗到共享符号与群体仪式：11 篇逐篇 Motivation / Method / Results]] — 共享符号、迷因与圈层身份、同步仪式、多人协作

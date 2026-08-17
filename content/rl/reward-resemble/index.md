@@ -78,7 +78,6 @@ tags:
 
 ### RM 过优化、集成与去偏
 
-- [[rl/reward-resemble/ds-harness-overfitting|DeepSeek Harness Overfitting：RLVR 评测—训练闭环中的过拟合风险]] — 区分 reward hacking、benchmark-driven selection 与公开 benchmark contamination。
 - [[rl/reward-resemble/reward-model-ensembles|Reward Model Ensembles：用保守聚合缓解过优化]] — 用 worst-case 或 uncertainty penalty 防 exploit。
 - [[rl/reward-resemble/warm|WARM：在参数空间平均 Reward Models]] — 以单模型推理成本获得权重集成。
 - [[rl/reward-resemble/odin|ODIN：解耦质量与长度奖励，缓解 RLHF 奖励黑客]] — 去掉可被利用的长度信号。

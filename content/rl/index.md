@@ -9,10 +9,15 @@ modified: 2026-08-17
 
 ## 系列
 
+- [[rl/open-ended-post-training/|开放式生成后训练：近年论文排序]] — 2009–2026 的 RLHF / preference learning / online 与 AI feedback、self-rewarding、reward model 鲁棒性与 judge 可信度，含按指标重排的 100 篇扩展榜。
 - [[rl/experience-replay/|Experience Replay：LLM 经验复用与 Off-Policy RL]] — rollout reuse、buffer 管理、hard-sample rescue 与 off-policy 稳定性。
 - [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]] — 奖励设计、Reward Model、多目标聚合与约束优化，并按主编评分排序。
 
 ## 论文
+
+### Open-ended Post-training
+
+- [[rl/open-ended-post-training/|开放式生成后训练：近年论文排序]]
 
 ### Experience Replay
 

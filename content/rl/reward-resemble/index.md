@@ -38,6 +38,10 @@ tags:
 
 ## 研究地图
 
+### 近期开放式生成后训练
+
+- [[rl/open-ended-post-training/|开放式生成后训练：近年论文排序]] — 2009–2026 的 RLHF / preference learning、online / AI feedback、preference optimization、self-rewarding 与 judge 可信度专题，含按指标重排的 100 篇扩展榜。
+
 ### Rubric Reward 与组合
 
 - [[rl/reward-resemble/rvpo|RVPO：通过方差正则实现风险敏感对齐]] — 用 SoftMin 防止容易目标补偿关键约束失败。

@@ -9,6 +9,10 @@ modified: 2026-08-18
 
 ## 论文列表
 
+## RL / Open-ended Post-training
+
+- **RL / 开放式生成后训练专题**：[[rl/open-ended-post-training/|开放式生成后训练：近年论文排序]] — 覆盖 2009–2026 的 RLHF / preference learning / AI feedback / self-rewarding / reward model / judge evaluation；含 15 篇主榜逐篇详细解读、按指标重排的 100 篇全量扩展榜和 diagnostic companion。
+
 ## Agents / Harness Overfitting
 
 - **Agents / Harness Overfitting 专题**：[[agents/harness-overfitting/|Agent Harness 依赖与过拟合：论文与博客排序]] — 固定 scaffold、工具 schema、观测格式、动作空间、verifier 与预算导致的跨 harness 泛化风险；含 26 个来源排序与筛选指标。

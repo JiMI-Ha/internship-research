@@ -16,6 +16,18 @@ modified: 2026-08-18
 
 ## 最新调研
 
+### [[rl/open-ended-post-training/|开放式生成后训练：近年论文排序]]
+
+`RLHF` · `Post-training` · `AI feedback` · `Preference optimization` · `Open-ended generation`
+
+本专题把范围大胆扩到 100 篇：从 2009 年 TAMER / human preference RLHF 根论文，到 2024–2026 的 online feedback、AI feedback、self-rewarding、binary feedback、reward model 鲁棒性和 LLM judge 可信度前沿。
+
+- **Motivation**：聊天、总结、写作和安全对齐没有确定 verifier，训练信号依赖人类偏好、AI judge、rubric 或 reward model，最容易出现 judge bias、reward hacking 和分布漂移。
+- **Method**：用前沿贴合度、反馈可扩展性、机制新颖性、评估可信度、鲁棒性/失效分析五项指标排序 OAIF、UltraFeedback、Critical Evaluation of AI Feedback、KTO、Self-Rewarding 等近期论文。
+- **Results**：OAIF、UltraFeedback、Critical Evaluation of AI Feedback、KTO、Self-Rewarding LM 排在第一梯队；专题已附 15 篇主榜逐篇解读与按指标重排的 100 篇全量扩展榜。
+
+[[rl/open-ended-post-training/|查看排序指标、总榜与研究 gap →]]
+
 ### [[gaming/npc-short-replies/|NPC 短回复：训练时深思考，推理时短表达]]
 
 `Gaming` · `NPC` · `Role-playing` · `Deliberation` · `Token budget`

@@ -2,7 +2,7 @@
 title: "实习调研"
 created: 2026-08-11
 published: 2026-08-11
-modified: 2026-08-17
+modified: 2026-08-18
 ---
 
 <div class="research-hero">
@@ -15,6 +15,18 @@ modified: 2026-08-17
 > 不只记录论文“说了什么”，还要区分问题证据、方法机制、实验结果与适用边界。
 
 ## 最新调研
+
+### [[gaming/npc-short-replies/|NPC 短回复：训练时深思考，推理时短表达]]
+
+`Gaming` · `NPC` · `Role-playing` · `Deliberation` · `Token budget`
+
+本专题扩大检索角色智能体、inner thought、rationale distillation、rubric judge、DPO/RL、长度偏差和安全 trade-off 论文，判断“训练时想多、推理时短说”的 NPC 后训练方案是否已有直接先例。
+
+- **Motivation**：游戏 NPC 需要在 30 token 量级内保持角色感、情绪、上下文相关和互动钩子；直接长 CoT 或长输出不符合部署体验。
+- **Method**：按 direct / adjacent 拆分 TBS、HER、APC-DPO、ROLETHINK、RoleLLM、Character-LLM、Fast Quiet-STaR、Implicit CoT、ODIN 等论文，并整理机制地图。
+- **Results**：未找到完全覆盖“角色 + 关系状态 + teacher deliberation + 短回复偏好 + DPO/RL + 无 CoT 推理”的单篇论文；建议组合角色 deliberation、rubric preference 和长度去偏训练。
+
+[[gaming/npc-short-replies/|查看论文排序、机制地图与实验建议 →]]
 
 ### [[agents/harness-overfitting/|Agent Harness 依赖与过拟合：论文与博客排序]]
 
@@ -235,6 +247,7 @@ RLHF 中“更有用”和“更安全”发生冲突时，Safe RLHF 分别学�
 ## 内容地图
 
 - **[[papers/|论文调研]]**：按 Motivation、Method、Results、Limitations 结构整理。
+- **[[gaming/|Gaming]] → [[gaming/npc-short-replies/|NPC 短回复]]**：角色智能体、训练时 deliberation、短回复偏好优化与安全评测。
 - **[[agents/|Agents]] → [[agents/harness-overfitting/|Harness 依赖与过拟合]]**：Agent scaffold、工具协议、交互环境与跨 harness 泛化。
 - **[[opd/|OPD]] → [[opd/mopd/|MOPD：多教师能力整合]]**：On-Policy Distillation、多教师能力合版、稳定性与工程实现。
 - **[[rl/|RL]] → [[rl/reward-resemble/|Reward Resemble：奖励设计与多目标对齐]]**：奖励设计、Reward Model、多目标聚合与约束优化。

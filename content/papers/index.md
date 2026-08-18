@@ -2,7 +2,7 @@
 title: "论文调研"
 created: 2026-08-11
 published: 2026-08-11
-modified: 2026-08-17
+modified: 2026-08-18
 ---
 
 这里收录论文的结构化阅读笔记，重点回答三个问题：研究动机是否真实、方法如何解决问题、结果是否足以支持主张。
@@ -12,6 +12,11 @@ modified: 2026-08-17
 ## Agents / Harness Overfitting
 
 - **Agents / Harness Overfitting 专题**：[[agents/harness-overfitting/|Agent Harness 依赖与过拟合：论文与博客排序]] — 固定 scaffold、工具 schema、观测格式、动作空间、verifier 与预算导致的跨 harness 泛化风险；含 26 个来源排序与筛选指标。
+
+## Gaming / NPC 短回复
+
+- **Gaming / NPC 短回复专题**：[[gaming/npc-short-replies/|训练时深思考，推理时短表达]] — 面向 token 预算角色智能体的 role-play deliberation、preference / RL、rubric judge、短回复与安全评测；含基于 4 个无权重指标的 direct / adjacent 论文排序与 12 篇逐篇解读。
+  - 推荐阅读顺序：[[gaming/npc-short-replies/thinking-before-speaking-mindset|Thinking Before Speaking]]、[[gaming/npc-short-replies/her-role-playing|HER]]、[[gaming/npc-short-replies/rolethink-mirror|ROLETHINK / MIRROR]]、[[gaming/npc-short-replies/apc-dpo-global-faithfulness|APC-DPO]]、[[gaming/npc-short-replies/rolellm|RoleLLM]]、[[gaming/npc-short-replies/characterglm|CharacterGLM]]、[[gaming/npc-short-replies/character-llm|Character-LLM]]、[[gaming/npc-short-replies/simsconv-simschat|SimsConv / SimsChat]]、[[gaming/npc-short-replies/neeko-dynamic-lora|Neeko]]、[[gaming/npc-short-replies/mindecho-kol-rpla|MINDECHO]]、[[gaming/npc-short-replies/lifechoice-character-destiny|Character is Destiny]]、[[gaming/npc-short-replies/roleplay-safety-utility-tradeoff|Role-play Safety-Utility]]。
 
 ## Gaming / 创造语言
 
